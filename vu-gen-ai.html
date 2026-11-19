@@ -1,0 +1,1447 @@
+<!DOCTYPE html>
+<html lang="en-AU">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Working Better with AI: VU Digital Community of Practice, 20 November 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700&family=Source+Serif+4:opsz,wght@8..60,500;8..60,700&display=swap">
+<style>
+:root{
+ --navy:#0b3a6f; --blue:#1f6fc5; --sky:#e3eefa; --sky2:#f2f7fd; --ink:#1b2633; --muted:#4a5868;
+ --line:#c9d6e5; --page:#fbfcfe; --white:#fff;
+ --orange:#b4500b; --orangebg:#fdf1e7; --teal:#0f6b5c; --tealbg:#e6f4f1; --plum:#6a3d8f; --plumbg:#f3edf8;
+ --red:#a32121; --redbg:#fbecec; --ok:#1d6b2e; --okbg:#e8f5ea;
+ --serif:"Source Serif 4", Georgia, "Times New Roman", serif;
+ --sans:"Source Sans 3", "Segoe UI", system-ui, -apple-system, Arial, sans-serif;
+ --fs:18px;
+}
+*{box-sizing:border-box}
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);color-scheme:light}
+html{scroll-padding-top:calc(env(safe-area-inset-top,0px) + 8rem)}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:30;background:#fff}
+html{font-size:var(--fs)}
+body{margin:0;background:var(--page);color:var(--ink);font-family:var(--sans);font-size:1rem;line-height:1.55}
+h1,h2,h3{font-family:var(--serif);color:var(--navy);line-height:1.2;font-weight:700}
+h1{font-size:1.35rem;margin:0}
+h2{font-size:1.7rem;margin:.2rem 0 .6rem}
+h3{font-size:1.25rem;margin:1.2rem 0 .4rem}
+p{margin:.5rem 0 .8rem}
+a{color:var(--blue)}
+.skip{position:absolute;left:-999px;top:0;background:var(--navy);color:#fff;padding:.5rem 1rem;z-index:99}
+.skip:focus{left:.5rem}
+:focus-visible{outline:3px solid var(--orange);outline-offset:2px}
+header.top{background:var(--white);border-bottom:1px solid var(--line);position:sticky;top:env(safe-area-inset-top,0px);z-index:20}
+.topin{max-width:1200px;margin:0 auto;padding:.6rem 1rem;display:flex;flex-wrap:wrap;gap:.6rem 1.2rem;align-items:center;justify-content:space-between}
+.brand{display:flex;flex-direction:column}
+.brand small{color:var(--muted);font-size:.8rem}
+.tools{display:flex;flex-wrap:wrap;gap:.5rem;align-items:center}
+.timer{display:flex;align-items:center;gap:.35rem;background:var(--sky2);border:1px solid var(--line);border-radius:10px;padding:.25rem .45rem}
+.timer output{font-variant-numeric:tabular-nums;font-weight:700;font-size:1.15rem;min-width:3.4rem;text-align:center;color:var(--navy)}
+.timer.done output{color:var(--orange)}
+.timer select{font-size:.85rem;padding:.2rem}
+nav.tabs{max-width:1200px;margin:0 auto;padding:0 1rem;display:flex;gap:.25rem;overflow-x:auto}
+nav.tabs button{border:0;background:none;font:inherit;font-size:.95rem;padding:.6rem .8rem;border-bottom:3px solid transparent;color:var(--muted);cursor:pointer;white-space:nowrap}
+nav.tabs button[aria-current="page"]{color:var(--navy);border-bottom-color:var(--blue);font-weight:700}
+nav.tabs button .tick{color:var(--ok);margin-left:.25rem}
+main{max-width:980px;margin:0 auto;padding:1.4rem 1rem 4rem}
+.btn{font:inherit;font-size:.95rem;border-radius:8px;border:1.5px solid var(--blue);background:var(--white);color:var(--blue);padding:.5rem .9rem;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;gap:.35rem;line-height:1.25;min-height:44px}
+.btn:hover{background:var(--sky2)}
+.btn.primary{background:var(--blue);color:#fff}
+.btn.primary:hover{background:var(--navy);border-color:var(--navy)}
+.btn.small{min-height:36px;padding:.3rem .65rem;font-size:.88rem}
+.btn.ghost{border-color:var(--line);color:var(--ink)}
+.btn.warn{border-color:var(--red);color:var(--red)}
+.btn[disabled]{opacity:.45;cursor:not-allowed}
+.row{display:flex;flex-wrap:wrap;gap:.5rem;align-items:center}
+.panel{background:var(--white);border:1px solid var(--line);border-radius:12px;padding:1.1rem 1.2rem;margin:1rem 0}
+.soft{background:var(--sky2);border:1px solid var(--line);border-radius:12px;padding:.9rem 1.1rem;margin:1rem 0}
+.lead{font-size:1.1rem;max-width:68ch}
+.measure{max-width:70ch}
+label{font-weight:600}
+.lbl{display:block;font-weight:600;margin:.8rem 0 .3rem}
+.hint{color:var(--muted);font-size:.9rem;font-weight:400;font-family:var(--sans)}
+textarea,input[type=text],select{font:inherit;font-size:1rem;color:var(--ink);border:1.5px solid #9fb3c9;border-radius:8px;padding:.55rem .65rem;width:100%;background:#fff}
+textarea{min-height:7rem;resize:vertical;line-height:1.5}
+textarea.tall{min-height:14rem}
+textarea.short{min-height:4.2rem}
+select{width:auto;max-width:100%;min-height:44px}
+fieldset{border:0;padding:0;margin:.6rem 0}
+legend{font-weight:600;padding:0;margin-bottom:.3rem}
+.radios{display:flex;flex-wrap:wrap;gap:.4rem}
+.radios label{font-weight:400;display:inline-flex;gap:.45rem;align-items:center;border:1.5px solid var(--line);border-radius:999px;padding:.35rem .85rem;cursor:pointer;background:#fff;min-height:44px}
+.radios label:has(input:checked){border-color:var(--blue);background:var(--sky);font-weight:600}
+.radios input{width:1.1rem;height:1.1rem;accent-color:var(--blue)}
+.checks label{display:flex;gap:.55rem;align-items:flex-start;font-weight:400;margin:.35rem 0;cursor:pointer}
+.checks input{width:1.2rem;height:1.2rem;margin-top:.2rem;accent-color:var(--blue);flex:none}
+.q{font-family:var(--serif);font-size:1.6rem;color:var(--navy);line-height:1.3;border-left:6px solid var(--orange);padding:.3rem 0 .3rem 1rem;margin:1.2rem 0;max-width:34ch}
+.promptbox{white-space:pre-wrap;background:var(--sky2);border:1px solid var(--line);border-radius:10px;padding:.9rem 1rem;font-size:1rem}
+.src{border-radius:10px;padding:.75rem 1rem;margin:.6rem 0;border:1px solid var(--line)}
+.src .tag{display:inline-block;font-size:.82rem;font-weight:700;border-radius:6px;padding:.1rem .5rem;margin-bottom:.3rem}
+.src.pasted{border-left:6px solid var(--blue);background:#fff}.src.pasted .tag{background:var(--sky);color:var(--navy)}
+.src.prep{border-left:6px dashed var(--orange);background:var(--orangebg)}.src.prep .tag{background:#fbdcc4;color:#7a3505}
+.src.judg{border-left:6px solid var(--teal);background:var(--tealbg)}.src.judg .tag{background:#c7e8e1;color:#0a4d42}
+.src.rev{border-left:6px solid var(--plum);background:var(--plumbg)}.src.rev .tag{background:#e2d5ee;color:#4b2a67}
+.src.own{border-left:6px solid #6b7a8c;background:#fff}.src.own .tag{background:#e6ebf1;color:#334}
+.src pre,.pre{white-space:pre-wrap;font-family:inherit;margin:.3rem 0 0}
+.facts{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.facts ul{margin:.2rem 0;padding-left:1.2rem}
+.facts h4{margin:.2rem 0;font-size:1rem;color:var(--navy)}
+.stepper{display:flex;gap:.3rem;margin:.6rem 0 1rem;flex-wrap:wrap;counter-reset:s}
+.stepper button{flex:1 1 7rem;font:inherit;font-size:.9rem;border:1.5px solid var(--line);background:#fff;border-radius:8px;padding:.45rem .5rem;cursor:pointer;color:var(--muted);text-align:left;min-height:44px}
+.stepper button[aria-current="step"]{border-color:var(--blue);background:var(--sky);color:var(--navy);font-weight:700}
+.stepper button.done{color:var(--ok)}
+.stepper .n{font-weight:700;margin-right:.3rem}
+.navrow{display:flex;justify-content:space-between;gap:.6rem;margin-top:1.4rem;flex-wrap:wrap}
+.claim{border:1.5px solid var(--line);border-radius:12px;padding:.9rem 1rem;margin:.8rem 0;background:#fff}
+.claim h3{margin:.1rem 0 .4rem;font-size:1.1rem}
+.err{color:var(--red);background:var(--redbg);border-radius:8px;padding:.5rem .8rem;margin:.6rem 0}
+.note{color:var(--muted);font-size:.92rem}
+.okmsg{color:var(--ok);background:var(--okbg);border-radius:8px;padding:.5rem .8rem;margin:.6rem 0}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.cmpcol{background:#fff;border:1px solid var(--line);border-radius:12px;padding:.8rem 1rem;min-width:0}
+.cmpcol h3{margin-top:.2rem}
+.cmpcol .pre{max-height:22rem;overflow:auto;background:var(--sky2);border-radius:8px;padding:.6rem .7rem;font-size:.95rem}
+table.judge{width:100%;border-collapse:collapse}
+table.judge th,table.judge td{border-bottom:1px solid var(--line);padding:.5rem .3rem;vertical-align:top;text-align:left}
+.tblwrap{overflow-x:auto}
+details.why{margin:.8rem 0;border:1px solid var(--line);border-radius:10px;background:#fff}
+details.why summary{cursor:pointer;padding:.55rem .9rem;font-weight:600;color:var(--blue);min-height:44px;display:flex;align-items:center}
+details.why>div{padding:0 1rem .8rem}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(15rem,1fr));gap:.9rem}
+.choice{display:flex;flex-direction:column;justify-content:flex-start;border:1.5px solid var(--line);border-radius:12px;background:#fff;padding:1rem;text-align:left;font:inherit;cursor:pointer;color:var(--ink)}
+.choice[aria-pressed="true"]{border-color:var(--blue);background:var(--sky);box-shadow:inset 0 0 0 1px var(--blue)}
+.choice strong{display:block;font-family:var(--serif);color:var(--navy);font-size:1.15rem;margin-bottom:.2rem}
+.strategy{display:grid;grid-template-columns:repeat(auto-fit,minmax(16rem,1fr));gap:.9rem}
+.strategy div{border-top:4px solid var(--blue);background:#fff;border-radius:0 0 10px 10px;padding:.8rem 1rem;border-left:1px solid var(--line);border-right:1px solid var(--line);border-bottom:1px solid var(--line)}
+.strategy div:nth-child(2){border-top-color:var(--teal)}.strategy div:nth-child(3){border-top-color:var(--orange)}
+.chain{font-weight:700;color:var(--navy);font-size:1.02rem}
+.routebar{background:var(--orangebg);border:1px solid #f1c9a6;border-radius:10px;padding:.6rem 1rem;margin-bottom:1rem;display:flex;flex-wrap:wrap;gap:.5rem 1rem;align-items:center;justify-content:space-between}
+.scenbar{display:flex;flex-wrap:wrap;gap:.6rem;align-items:center;margin:.4rem 0 .8rem}
+.learn{border:2px solid var(--navy);border-radius:12px;padding:1rem 1.2rem;background:#fff;margin:1.2rem 0}
+.learn h3{margin-top:.2rem}
+.learn dl{margin:0}.learn dt{font-weight:700;color:var(--navy);margin-top:.7rem}.learn dd{margin:.2rem 0 0}
+.learn ul{margin:.2rem 0;padding-left:1.2rem}
+.aibar{border:1px solid var(--line);border-radius:12px;padding:.8rem 1rem;background:#fff;margin:.8rem 0}
+.aibar .row a.btn{border-color:var(--navy);color:var(--navy)}
+.diff ins{background:#d8f0dc;text-decoration:none;border-radius:3px}
+.diff del{background:#f7d9d9;color:#7a1f1f;border-radius:3px}
+.pill{display:inline-block;border-radius:999px;padding:.05rem .6rem;font-size:.85rem;font-weight:700}
+.pill.Supported{background:var(--okbg);color:var(--ok)}.pill.Uncertain{background:#fff4d6;color:#7a5a00}.pill.Unsupported{background:var(--redbg);color:var(--red)}
+.fade{animation:fade .25s ease-out}
+@keyframes fade{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){.fade{animation:none}}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+.toast{position:fixed;bottom:1rem;left:50%;transform:translateX(-50%);background:var(--navy);color:#fff;padding:.6rem 1rem;border-radius:8px;z-index:50;font-size:.95rem}
+#printArea{display:none}
+.summary h3{border-bottom:1px solid var(--line);padding-bottom:.2rem}
+.summary .pre{background:var(--sky2);border-radius:8px;padding:.5rem .7rem}
+@media (max-width:760px){
+ .facts,.two{grid-template-columns:1fr}
+ h2{font-size:1.45rem}.q{font-size:1.35rem}
+ .stepper button{flex:1 1 45%}
+ .topin{padding:.5rem .7rem}
+ .timer{flex-wrap:wrap;gap:.25rem}.timer .btn.small{padding:.25rem .5rem;min-height:40px}.tools{width:100%}
+}
+@media print{
+ body>*:not(#printArea){display:none!important}
+ #printArea{display:block!important;font-size:12pt}
+ #printArea .pre{white-space:pre-wrap}
+}
+.brandbtn{all:unset;cursor:pointer;font-family:var(--serif);color:var(--navy);font-weight:700}
+.brandbtn:focus-visible{outline:3px solid var(--orange);outline-offset:2px}
+::placeholder{color:#7c8794;font-style:italic;opacity:1}
+.units{list-style:none;padding:0;margin:.6rem 0}
+.units li{border:1.5px solid var(--line);border-radius:10px;margin:.4rem 0;background:#fff}
+.units li:has(input:checked){border-color:var(--blue);background:var(--sky)}
+.units label{display:flex;gap:.7rem;align-items:flex-start;padding:.55rem .8rem;cursor:pointer;font-weight:400}
+.units input{width:1.25rem;height:1.25rem;margin-top:.2rem;flex:none;accent-color:var(--blue)}
+.units .num{color:var(--muted);font-variant-numeric:tabular-nums;min-width:1.6rem;font-size:.9rem;margin-top:.1rem}
+.home{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem}
+.scard{background:#fff;border:1px solid var(--line);border-top:5px solid var(--blue);border-radius:0 0 12px 12px;padding:1rem 1.2rem;display:flex;flex-direction:column}
+.scard:nth-child(2){border-top-color:var(--teal)}.scard:nth-child(3){border-top-color:var(--plum)}.scard:nth-child(4){border-top-color:var(--orange)}
+.scard h3{margin:.1rem 0 .3rem}.scard .chain{margin:.1rem 0 .5rem}.scard p{flex:1}.scard p.chain,.scard p.status{flex:none}
+.scard .status{color:var(--ok);font-size:.9rem;font-weight:600}
+.takecard{grid-column:1/-1;background:var(--sky2);border:1px dashed var(--navy);border-radius:12px;padding:1rem 1.2rem;display:flex;flex-wrap:wrap;gap:.8rem;align-items:center;justify-content:space-between}
+.takecard h3{margin:0}
+.back{margin-bottom:.6rem}
+@media (max-width:760px){.home{grid-template-columns:1fr}}
+.modalbg{position:fixed;inset:0;background:rgba(11,58,111,.35);display:flex;align-items:center;justify-content:center;z-index:100;padding:1rem}.modal{background:#fff;border-radius:12px;padding:1.2rem 1.3rem;max-width:30rem;width:100%;box-shadow:0 10px 30px rgba(0,0,0,.25)}.modal p{margin-top:0}
+#tpH{scroll-margin-top:7rem}
+.event{background:var(--navy);color:#fff;border-radius:14px;padding:1.3rem 1.5rem 1.2rem;margin:0 0 1.6rem;position:relative;overflow:hidden}
+.event::after{content:"";position:absolute;right:-3rem;top:-3rem;width:11rem;height:11rem;border-radius:50%;border:18px solid rgba(255,255,255,.08)}
+.event p{margin:0;position:relative;z-index:1}
+.event-kicker{font-size:.9rem;color:#cfe0f5}
+.event-date{display:inline-block;margin-top:.5rem!important;background:var(--orange);color:#fff;font-weight:700;border-radius:6px;padding:.15rem .6rem;font-size:.95rem}
+.event-theme{font-family:var(--serif);font-size:1.75rem;line-height:1.2;font-weight:700;margin-top:.6rem!important}
+.event-session{border-left:4px solid #f0a868;padding:.1rem 0 .1rem .9rem;margin:1rem 0 .9rem;position:relative;z-index:1}
+.event-label{font-size:.85rem;color:#f6c9a1;font-weight:700}
+.event-talk{font-size:1.12rem;font-weight:600;margin-top:.15rem!important}
+.event-who{color:#cfe0f5;margin-top:.2rem!important}
+.event-note{color:#e6eef8;font-size:.95rem;max-width:70ch}
+@media (max-width:760px){.event{padding:1.1rem}.event-theme{font-size:1.4rem}}
+.flash{animation:flashbox 1.8s ease-out}
+@keyframes flashbox{0%,40%{background:#fff3c4;box-shadow:0 0 0 3px #e0b000}100%{background:#fff;box-shadow:none}}
+@media (prefers-reduced-motion:reduce){.flash{animation:none;box-shadow:0 0 0 3px #e0b000}}
+.qbtn{display:inline-flex;align-items:center;justify-content:center;width:1.6rem;height:1.6rem;min-height:0;border-radius:50%;border:1.5px solid var(--blue);background:#fff;color:var(--blue);font:700 .9rem/1 var(--sans);cursor:pointer;margin-left:.4rem;vertical-align:middle;padding:0}
+.qbtn:hover{background:var(--blue);color:#fff}
+.modal.help{max-width:40rem;max-height:85vh;overflow:auto}
+.modal.help h3{margin-top:0}
+.modal.help dt{font-weight:700;margin-top:.8rem}
+.modal.help dt .pill{margin-right:.3rem}
+.modal.help dd{margin:.2rem 0 0}
+.modal.help .eg{background:var(--sky2);border-left:4px solid var(--blue);padding:.35rem .6rem;margin:.35rem 0 0;border-radius:0 6px 6px 0;font-size:.95rem}
+</style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js" defer></script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="top">
+ <div class="topin">
+  <div class="brand"><h1><button type="button" id="brandBtn" class="brandbtn">Working Better with AI</button></h1><small>VU Digital Community of Practice, 20 November 2026</small></div>
+  <div class="tools"><button class="btn small ghost" id="homeBtn" type="button">All strategies</button><button class="btn small ghost" id="takeBtn" type="button">My takeaways</button></div>
+ </div>
+</header>
+<div class="sr" aria-live="polite" id="live"></div>
+<main id="main" tabindex="-1"></main>
+<div id="printArea"></div>
+<script>
+/* ---------- Prepared content (all illustrative, written in advance) ---------- */
+const PLATFORMS = [
+  {id:'ChatGPT', label:'Open ChatGPT', url:'https://chatgpt.com/'},
+  {id:'Claude', label:'Open Claude', url:'https://claude.ai/'},
+  {id:'Gemini', label:'Open Gemini', url:'https://gemini.google.com/'},
+  {id:'Microsoft Copilot', label:'Open Microsoft Copilot', url:'https://copilot.microsoft.com/'}
+];
+const TOOLS = ['ChatGPT','Claude','Gemini','Microsoft Copilot','Other','Prepared example'];
+
+const SCEN = {
+A: {
+ name:'Inclusive community event', short:'Community event',
+ initialPrompt:`Develop a welcoming community event for adults who do not know one another. Suggest a programme, resources and ways to encourage participation. Explain why your activities would help people connect.`,
+ facts:['Twenty adults.','Sixty minutes.','A free community room and two volunteers.','No cooking facilities.','Food preferences and language needs have not yet been confirmed.'],
+ constraints:['A total budget of $120.','Activities must allow seated participation.','Participants may have different levels of confidence speaking in a group.'],
+ criteria:'A feasible agenda, estimated costs within budget, inclusive participation and explicit handling of missing information.',
+ goal:'Plan a 60-minute welcoming event that helps adults who do not know one another start to connect.',
+ audience:'Twenty adults who have not met before, with different levels of confidence speaking in a group.',
+ output:'A timed agenda that adds up to 60 minutes, volunteer responsibilities, an itemised cost estimate with a total, and alternatives for people who are uncomfortable speaking to the whole group.',
+ initialResponse:`Community Connections Morning: a programme for new acquaintances
+
+Programme (about 90 minutes)
+1. Welcome and name badges (10 min). Greet people at the door, hand out name badges and invite them to grab a drink.
+2. Human bingo (15 min). Each person gets a bingo card with prompts such as "has lived overseas" or "plays an instrument" and walks around the room finding someone who matches each square. This gets people moving and talking straight away.
+3. Round of introductions (15 min). Everyone shares their name and one thing they love about the area with the whole group.
+4. Small-group conversation (20 min). Seat people in small groups of four or five with conversation prompt cards, so quieter people can talk without addressing the whole room.
+5. Collaborative poster (20 min). Each group creates a poster called "Our ideal neighbourhood".
+6. Shared morning tea and close (10 min). Serve a shared morning tea with vegetarian and gluten-free options, and invite people to sign up for a follow-up event.
+
+Resources and estimated costs
+- Snacks and drinks: $60
+- Name badges and markers: $10
+- Printed bingo and conversation cards: $15
+- Poster and craft materials: $30
+- Small prizes for bingo winners: $25
+Total estimated cost: $140
+
+Why this helps people connect
+Movement-based games lower social barriers, small groups give everyone a chance to speak, and a shared creative task gives people something to talk about other than themselves. Ending with food encourages people to stay and continue conversations.`,
+ initialReceived:'Only the initial prompt above. It did not receive the fact card, so it was not told the group size, the 60-minute limit, the $120 budget or the need for seated activities.',
+ claims:[
+  {text:'Seat people in small groups of four or five with conversation prompt cards, so quieter people can talk without addressing the whole room.', type:'Recommendation', verdict:'Supported', evidence:'The fact card says participants have different levels of confidence speaking in a group and activities must be seated. Twenty adults make four groups of five, and two volunteers can each support two tables.'},
+  {text:'Serve a shared morning tea with vegetarian and gluten-free options.', type:'Recommendation', verdict:'Uncertain', evidence:'Food without cooking is feasible, but the fact card says food preferences have not been confirmed, so we cannot yet tell whether these options meet people\'s needs. The cost also needs checking against the budget.'},
+  {text:'Total estimated cost: $140.', type:'Factual claim', verdict:'Unsupported', evidence:'The line items do add up to $140, but the fact card gives a total budget of $120, so the plan is $20 over budget. The AI was not given the budget, so this shows the value of supplying context.'}
+ ],
+ omission:'It did not say what it was assuming about numbers, timing or budget, and it did not flag unknown food preferences or language needs as things to find out. It also ran to about 90 minutes and included a standing game.',
+ improvedPrompt:`Goal: Plan a 60-minute welcoming event that helps adults who do not know one another start to connect.
+
+Audience: Twenty adults who have not met before. They have different levels of confidence speaking in a group.
+
+Relevant facts:
+- A free community room and two volunteers.
+- No cooking facilities.
+- Food preferences and language needs have not yet been confirmed.
+
+Constraints:
+- Total budget of $120, including everything.
+- Every activity must allow seated participation.
+- The event must fit in 60 minutes.
+
+Requested output:
+1. A timed agenda that adds up to exactly 60 minutes.
+2. Responsibilities for each of the two volunteers.
+3. An itemised cost estimate with a total, staying within $120.
+4. For each activity, an alternative for people who are uncomfortable speaking to the whole group.
+
+Success criteria: a feasible agenda, estimated costs within budget, inclusive participation and explicit handling of missing information.
+
+Missing information and assumptions: List any needs that are still unresolved, such as food preferences or language needs, and say how the organisers could find out. Do not invent these needs. State any assumptions you make.`,
+ improvedResponse:`Community connection hour (60 minutes, 20 adults, all activities seated)
+
+Timed agenda
+0:00 to 0:10 Welcome. Name badges at the door, tea and coffee, people choose any table (four tables of five).
+0:10 to 0:20 Table introductions. Each person answers one prompt card of their choice. Alternative: anyone can pass, or write their answer on the card for a volunteer to read out at the table.
+0:20 to 0:40 Table activity: "Our local favourites" poster. Each table lists favourite places, foods or tips for the area. Roles: writer, drawer, ideas person, timekeeper. Alternative: people can contribute in writing on sticky notes.
+0:40 to 0:50 Poster walk. Tables stay seated; a volunteer carries each poster around, or a table member reads out one highlight. Alternative: tables can choose to display their poster without speaking.
+0:50 to 1:00 Close. Invite people to note interest in a next meeting on a sign-up sheet and write one word about the event on a feedback card.
+Total: 60 minutes.
+
+Volunteer responsibilities
+Volunteer 1: welcome, name badges, food and drinks, sign-up sheet.
+Volunteer 2: timekeeping, moving between tables, reading out written contributions, carrying posters.
+
+Estimated costs (check local prices)
+- Tea, coffee, milk and biscuits: $45
+- Fruit platter: $25
+- Name badges and markers: $10
+- Printed prompt cards: $10
+- Poster paper and sticky notes: $15
+- Contingency: $15
+Total: $120
+
+Unresolved needs (not assumed)
+- Food preferences and allergies: ask on the registration form before buying food.
+- Language needs: ask on registration whether anyone would like materials in another language or a support person.
+- Room access: confirm the room has step-free access and enough chairs.
+
+Assumptions
+- Twenty people attend; if fewer, combine tables.
+- Prices are estimates and need checking before purchase.`,
+ improvedReceived:'The example improved prompt above, which includes the fact card details and the success criteria.',
+ reflectionExample:'Adding the 60-minute limit, the $120 budget and the seated rule made the agenda and costs checkable, and the revised plan now fits all three. Asking for unresolved needs stopped the AI from guessing food preferences. Still to check: real local prices, and whether the poster task suits people who are less comfortable writing in English.',
+ fb:{
+  draft:`Community connection afternoon (60 minutes)
+- Welcome and name badges
+- Icebreaker game
+- Group activity: make a poster about our area
+- Share posters
+- Tea and biscuits
+Budget: tea, biscuits and poster materials, about $80. Two volunteers will help.`,
+  criteria:['The agenda clearly fits 60 minutes.','Costs are itemised and within $120.','Every activity allows seated participation and does not require speaking to the whole group.','Missing information is acknowledged rather than invented.'],
+  suggestions:[
+   {text:'Add a time to each item so readers can see the agenda fits 60 minutes.', decision:'Accept', reason:'The draft does not show timings, so I cannot check it fits the hour. Adding times meets the first criterion.'},
+   {text:'Hire a local musician to open the event and make it more memorable.', decision:'Reject', reason:'Paid entertainment would take money from a $120 budget that already has $80 committed, and it reduces time for people to talk to each other, which is the purpose.'},
+   {text:'Replace "icebreaker game" with a named seated activity, and give people a way to take part without speaking to the whole room.', decision:'Accept', reason:'"Icebreaker game" is too vague to check against the seated and confidence requirements. A named seated activity with a written option fixes both.'},
+   {text:'Ask every person to present their poster to the whole group.', decision:'Adapt', reason:'Sharing helps people connect, but the fact card says confidence varies. I will let each table choose a reader or simply display the poster.'}
+  ],
+  revisedExample:`Community connection afternoon (60 minutes, all seated)
+0:00 to 0:10 Welcome, name badges and tea
+0:10 to 0:20 Table introductions with prompt cards (people may pass or write their answer)
+0:20 to 0:40 Table poster: "Our local favourites"
+0:40 to 0:50 Poster share: each table chooses a reader or displays its poster
+0:50 to 1:00 Close and sign-up for next time
+Budget: tea, coffee and biscuits $45; poster paper and sticky notes $15; prompt cards $10; name badges $10. Total $80, within $120.
+Two volunteers: one welcomes and serves, one keeps time and supports tables.
+Still to confirm: food preferences and language needs.`
+ },
+ assess:'Students plan an event with AI, then submit the AI plan, three claim cards checked against the brief, their improved prompt and the revised plan. In a short conversation they explain why one recommendation did not fit the brief.'
+},
+B: {
+ name:'Personalised learning plan', short:'Learning plan',
+ initialPrompt:`Create a four-week study programme for an adult returning to education who needs to improve introductory statistics. Include practice activities, ways to check progress and suggestions for staying motivated.`,
+ facts:['Thirty minutes available each weekday.','Test topics: averages, interpreting graphs and basic probability.','The learner struggles with fractions.','The test is in four weeks.','The learner wants to understand methods and explain answers independently.'],
+ constraints:['No planned weekend study.','No paid resources are available.'],
+ criteria:'A realistic workload, support for prerequisite knowledge, active practice and checks of independent understanding.',
+ goal:'Create a four-week study plan that prepares an adult learner for an introductory statistics test.',
+ audience:'An adult returning to education who struggles with fractions and wants to understand methods, not just memorise steps.',
+ output:'A week-by-week plan of weekday 30-minute sessions, with the activity for each session, a weekly progress check and simple motivation strategies.',
+ initialResponse:`Four-week statistics study programme
+
+Week 1: Averages
+- Monday to Friday, 45 minutes a day: learn mean, median and mode from video lessons, then complete 10 practice questions.
+- Saturday: one-hour review of the week.
+
+Week 2: Interpreting graphs
+- Weekdays: study bar charts, histograms and line graphs. Describe what each graph shows in one sentence.
+- Saturday: one-hour review.
+
+Week 3: Basic probability
+- Weekdays: probability rules, simple events and two-way tables.
+- Saturday: one-hour review.
+
+Week 4: Revision and practice tests
+- Complete one full practice test every second day and review mistakes.
+
+Practice activities
+- Begin each session with 5 minutes reviewing errors from the previous session.
+- Use a statistics practice app with a premium subscription for unlimited questions.
+
+Checking progress
+- By the end of week 2 you should be able to score 80% on a practice test.
+- Keep a log of scores.
+
+Staying motivated
+- Set a small reward for each completed week.
+- Study with a friend if possible.`,
+ initialReceived:'Only the initial prompt above. It was not told the 30-minute limit, the no-weekend rule, the fractions difficulty or that paid resources are unavailable.',
+ claims:[
+  {text:'Begin each session with 5 minutes reviewing errors from the previous session.', type:'Recommendation', verdict:'Supported', evidence:'It fits within a 30-minute weekday session and is active practice, which is one of the success criteria.'},
+  {text:'By the end of week 2 you should be able to score 80% on a practice test.', type:'Factual claim', verdict:'Uncertain', evidence:'We have no information about the learner\'s starting level or the test format, so there is no evidence for this target yet. It could be a useful goal if set from a baseline.'},
+  {text:'Saturday: one-hour review of the week.', type:'Recommendation', verdict:'Unsupported', evidence:'The fact card says there is no planned weekend study. The AI was not told this, so the mismatch shows why the context matters.'}
+ ],
+ omission:'It did not address the learner\'s difficulty with fractions, which underpin averages and probability, and it did not include any way to check that the learner can explain answers independently.',
+ improvedPrompt:`Goal: Create a four-week study plan that prepares an adult learner for an introductory statistics test.
+
+Audience: An adult returning to education who struggles with fractions and wants to understand methods, not just memorise steps.
+
+Relevant facts:
+- Test topics: averages, interpreting graphs and basic probability.
+- The test is in four weeks.
+- The learner wants to understand methods and explain answers independently.
+
+Constraints:
+- 30 minutes each weekday only. No weekend study.
+- Free resources only.
+
+Requested output: A week-by-week plan of 30-minute weekday sessions, with the activity for each session, a weekly progress check, and simple motivation strategies.
+
+Success criteria: a realistic workload, support for prerequisite knowledge (fractions), active practice and checks of independent understanding.
+
+Missing information and assumptions: Ask me about anything you need, such as the test format or whether a calculator is allowed. State any assumptions. Do not invent test scores or targets.`,
+ improvedResponse:`Four-week plan: 20 weekday sessions of 30 minutes (10 hours in total)
+
+Session pattern (every weekday)
+- 5 min: fix one mistake from last session.
+- 20 min: active practice on today's topic (work problems, not just watch).
+- 5 min: explain one answer in your own words, out loud or in writing, without notes.
+
+Week 1: Fractions for statistics, then the mean
+Mon to Wed: fractions, decimals and percentages (simplifying, converting, comparing).
+Thu to Fri: the mean, including means that are not whole numbers.
+Friday check: five mixed questions; explain one fraction step aloud.
+
+Week 2: Median, mode and range; reading graphs
+Mon to Tue: median, mode and range, and when each is useful.
+Wed to Fri: bar charts and line graphs. Write one sentence on what each graph shows and one thing it cannot show.
+Friday check: interpret an unfamiliar graph and explain your reasoning.
+
+Week 3: Basic probability
+Mon to Wed: probability as a fraction (favourable outcomes over total outcomes).
+Thu to Fri: simple combined events using lists or tables.
+Friday check: three probability questions; explain why each fraction is correct.
+
+Week 4: Mixed practice and readiness
+Mon to Thu: one mixed set per day across all topics, then correct mistakes.
+Fri: timed mixed set under test-like conditions; explain two answers without notes.
+
+Free resources
+Use free practice questions from your course or library, and free online lessons. Check that any resource matches your test topics.
+
+Motivation
+Tick off each session on a 20-box tracker. Keep an "I can explain" list that grows each week.
+
+Assumptions and questions
+- I assumed the test is at an introductory level. What is its format, and is a calculator allowed?
+- I have not set score targets because no baseline is available. A first Friday check can provide one.`,
+ improvedReceived:'The example improved prompt above, which includes the fact card details and the success criteria.',
+ reflectionExample:'Telling the AI about the 30-minute weekday limit and the fractions difficulty changed the plan the most: weekend reviews disappeared and week 1 now starts with fractions. Still to check: whether the free resources really match the test topics, and whether the Friday checks are long enough to give useful evidence.',
+ fb:{
+  draft:`Week 1: averages. Week 2: graphs. Week 3: probability. Week 4: revision.
+Study for 30 minutes on weekdays by watching free videos on each topic.
+Do a practice test at the end to see if I am ready.`,
+  criteria:['The workload fits 30 minutes each weekday with no weekend study.','Prerequisite knowledge (fractions) is supported.','Sessions involve active practice.','There are regular checks that the learner can explain answers independently.'],
+  suggestions:[
+   {text:'Add a fractions refresher at the start of week 1, because averages and probability rely on it.', decision:'Accept', reason:'The fact card says the learner struggles with fractions, and the draft never addresses it.'},
+   {text:'Add a one-hour catch-up session each weekend in case you fall behind.', decision:'Reject', reason:'The fact card says no weekend study is planned, so this does not fit the learner\'s situation.'},
+   {text:'Take a full practice test every Friday to track progress.', decision:'Adapt', reason:'Weekly checks help, but a full test will not fit in 30 minutes. I will use a short five-question check plus explaining one answer aloud.'},
+   {text:'Replace most video watching with working problems and explaining answers.', decision:'Accept', reason:'Watching is passive. Active practice and explaining match the learner\'s goal of understanding methods.'}
+  ],
+  revisedExample:`Week 1: fractions refresher (Mon to Wed), then the mean (Thu to Fri).
+Week 2: median, mode, range and reading graphs.
+Week 3: basic probability as fractions.
+Week 4: mixed practice.
+Each weekday (30 minutes): 5 minutes fixing a past mistake, 20 minutes working problems (short free videos only when stuck), 5 minutes explaining one answer without notes.
+Each Friday: a five-question check and one answer explained aloud.
+No weekend study.`
+ },
+ assess:'Students ask AI for a study plan, check it against their real constraints, and submit the plan with their verdicts. In a short demonstration they solve and explain one question from the plan without notes.'
+}
+
+};
+
+const TUTOR = {
+ t1:{scen:'B', title:'How much study time is there?', short:'Study time',
+  about:'An adult returning to study has 30 minutes each weekday for four weeks, with no weekend study, before an introductory statistics test. They find fractions hard and want to spend a quarter of their time on them. You are the learner: you want to work out the numbers yourself, with AI as your maths tutor.',
+  aim:'See the difference between asking AI for the answer and asking AI to tutor you, on a problem that needs several steps: counting days, converting minutes to hours and finding a fraction of a total.',
+  simple:'A learner can study for 30 minutes each weekday for four weeks, with no weekend study. They want to spend a quarter of that time on fractions. How many hours of study time do they have in total, and how many hours go to fractions? Keep your answer under 120 words.',
+  direct:'Study days: 5 weekdays × 4 weeks = 20 days.\nTotal time: 20 × 30 minutes = 600 minutes. 600 ÷ 60 = 10 hours.\nFractions: a quarter of 10 hours is 10 ÷ 4 = 2.5 hours, which is 2 hours 30 minutes.\nAnswer: 10 hours in total, of which 2 hours 30 minutes go to fractions.',
+  attemptEx:'5 days a week for 4 weeks is 20 days. 20 × 30 = 600 minutes, so 6 hours. A quarter of that is 1.5 hours.',
+  rounds:[
+   {ai:'Good problem to work through together. Let\'s start with time. Across the four weeks, how many days will the learner actually study? Remember there is no weekend study. Tell me your number and how you got it.',
+    me:'5 days a week for 4 weeks, so 20 days. 20 × 30 = 600 minutes, so that is 6 hours.'},
+   {ai:'Nice: 20 days and 600 minutes are both right. Now check the last step. How many minutes are there in one hour? Use that to turn 600 minutes into hours, then try the fractions part.',
+    me:'There are 60 minutes in an hour, so 600 ÷ 60 = 10 hours. A quarter of 10 hours is 10 ÷ 4 = 2.5 hours.'},
+   {ai:'That\'s it: 10 hours in total and 2.5 hours on fractions. Two last things. First, write 2.5 hours in hours and minutes. Second, explain your method in one or two sentences, as if to another learner. Then try this on your own: 45 minutes on Mondays, Wednesdays and Fridays for three weeks. How much time is that?',
+    me:'2.5 hours is 2 hours 30 minutes. My method: count the study days first, multiply by the minutes per day, then divide by 60 to get hours. New problem: 3 days × 3 weeks = 9 sessions, 9 × 45 = 405 minutes, which is 6 hours 45 minutes.'}
+  ],
+  reflectionEx:'The direct answer was faster and correct, but I just read it. With the tutor prompt I made the mistake of turning 600 minutes into 6 hours, and the hint made me find it myself, so I now know to divide by 60. I would use a direct answer to check my work, and the tutor approach when I am learning a method.'},
+ t2:{scen:'A', title:'Does the event budget add up?', short:'Event budget',
+  about:'You are helping organise a 60-minute community event for twenty adults with a total budget of $120. A draft plan lists its costs, and one of them is charged per person. You want to check the budget yourself, with AI as your tutor, instead of being told the answer.',
+  aim:'See the difference between asking AI for the answer and asking AI to tutor you, on a problem where it is easy to miss one step: multiplying a per-person cost before adding everything up.',
+  simple:'An event plan lists tea, coffee and biscuits at $3.50 per person for 20 people, name badges at $15, craft materials at $30 and printing at $12. The budget is $120. Does the plan fit the budget, and if not, by how much is it over? Keep your answer under 120 words.',
+  direct:'Per-person cost: 20 × $3.50 = $70.\nTotal: $70 + $15 + $30 + $12 = $127.\nThe budget is $120, so the plan is $7 over budget.\nTo fit, reduce one item by at least $7, for example spend $23 instead of $30 on craft materials.',
+  attemptEx:'$3.50 + $15 + $30 + $12 = $60.50, so it fits the budget easily.',
+  rounds:[
+   {ai:'Let\'s check it together. Look at the list again: most costs are fixed amounts, but one is charged per person. Which one is it, and what does it cost for all 20 people?',
+    me:'The tea, coffee and biscuits are per person. $3.50 × 20 = $60.'},
+   {ai:'You picked the right item, well done. Check the multiplication: what is $3.50 × 10? Then double it for 20 people. Once you have that, add it to the other three costs and compare the total with $120.',
+    me:'$3.50 × 10 = $35, doubled is $70. Total: $70 + $15 + $30 + $12 = $127. That is more than $120, so the plan is $7 over.'},
+   {ai:'Correct: $127, which is $7 over the budget. Now explain in your own words why the plan looked cheaper at first glance. Then suggest one change that brings it within $120 without removing an activity.',
+    me:'It looked cheap because I added $3.50 once instead of for every person. One change: spend $23 instead of $30 on craft materials, which brings the total to exactly $120.'}
+  ],
+  reflectionEx:'The direct answer told me straight away that the plan was $7 over. The tutor made me find the per-person cost myself, and I made a multiplication slip that the hint helped me fix. I understand why the plan looked cheaper now. The tutor approach took longer, but I could do the next budget check on my own.'}
+};
+const TUTOR_ADDS=[
+ ['hint','Act as my tutor. Do not give me the final answer.'],
+ ['one','Give me one hint at a time, then wait for my reply before you continue.'],
+ ['attempt','Start from my attempt below. Tell me what is right before pointing to any problem.'],
+ ['explain','If I am still stuck after two hints, explain only the next step, not the whole solution.'],
+ ['check','When I reach an answer, ask me to explain my method in my own words.'],
+ ['newq','Finish by giving me a similar problem to try on my own.'],
+ ['short','Keep each reply under 60 words.']
+];
+const TU_CMP=[['think','Which made you do more of the thinking?'],['understand','Which helped you understand the method better?'],['accurate','Which gave you a correct answer?'],['fast','Which was faster?'],['transfer','Which would help you more with a similar problem on your own?']];
+
+const ASSESS_EX = {
+ education:{label:'Education', s1:'generate three practice questions with worked answers on this week\'s topic', s2:'the accuracy and level of each worked answer', s3:'the set reading and lecture notes', s4:'explain where one question could mislead a learner and correct it',
+  task:'Use AI to create three practice questions with worked answers for a topic from this week.', ai:'AI drafts the questions and worked answers from a prompt that includes the topic outline.', verify:'Students check every worked answer against the set reading and mark each Supported, Uncertain or Unsupported with a reason.', evidence:'The prompt, the AI output, the verdict table with evidence and the corrected questions.', demo:'A two-minute explanation of one corrected question and why the original could mislead.'},
+ business:{label:'Business', s1:'draft a customer survey for a café trial', s2:'whether each question can be answered with data the owner can collect', s3:'the business fact sheet', s4:'justify which questions they kept, changed or removed',
+  task:'Use AI to draft a short customer survey to support a two-week café trial.', ai:'AI proposes survey questions from a prompt containing the business fact sheet.', verify:'Students check each question against the fact sheet and the trial budget, and decide Accept, Adapt or Reject with a reason.', evidence:'The prompt, the AI draft, the decision log and the final survey.', demo:'A short conversation explaining one rejected question and what evidence it would have needed.'},
+ writing:{label:'Writing', s1:'give feedback on a draft against the rubric', s2:'whether each suggestion fits the rubric and the purpose of the piece', s3:'the assignment rubric', s4:'explain why they accepted, adapted or rejected each suggestion and show the revision',
+  task:'Use AI to obtain feedback on a draft paragraph against the assignment rubric.', ai:'AI gives up to four suggestions, each linked to a rubric criterion, without rewriting the draft.', verify:'Students mark each suggestion Accept, Adapt or Reject with a reason that cites the rubric.', evidence:'The draft, the feedback, the decision log and the revised paragraph with changes visible.', demo:'In class, revise a new paragraph using one of the accepted suggestions and explain the change.'},
+ data:{label:'Data analysis', s1:'summarise a model\'s performance from a results table', s2:'whether each claim in the summary matches the confusion matrix', s3:'the provided results table', s4:'explain without notes why accuracy alone can mislead',
+  task:'Use AI to write a short summary of a model\'s performance on a fictional dataset.', ai:'AI writes the summary from a prompt containing the results table.', verify:'Students check each claim in the summary against the confusion matrix and recompute any figures.', evidence:'The prompt, the AI summary, the claim verdicts with recomputed figures and a corrected summary.', demo:'A short oral check: explain why 92% accuracy can hide a model that finds none of the cases that matter.'}
+};
+
+/* Grey "e.g." hints shown inside empty boxes */
+const PH={
+ A:{reason:'e.g., The fact card gives a $120 budget, but these items add up to $140, so the plan is over budget.',omission:'e.g., It did not mention the budget or ask about food preferences.',
+  goal:'e.g., Plan a 60-minute welcoming event for adults who have not met.',audience:'e.g., Twenty adults with different confidence speaking in groups.',facts:'e.g., - Twenty adults.\n- Two volunteers.',constraints:'e.g., - Total budget of $120.',output:'e.g., A timed agenda that adds up to 60 minutes, with costs.',criteria:'e.g., Costs within budget and inclusive, seated activities.',missing:'e.g., List any needs you are unsure about instead of guessing them.',
+  acc:'e.g., The costs now add up to $120, matching the budget.',feas:'e.g., The agenda now fits the 60 minutes available.',rel:'e.g., All activities now suit adults who have just met.',unc:'e.g., It lists food preferences as unknown instead of guessing.',use:'e.g., I could run this plan with small changes.',
+  reflection:'e.g., Adding the budget made the costs checkable. I still need to check local prices.',sug:'e.g., Add a time to each item so the agenda clearly fits 60 minutes.',decReason:'e.g., Reject: paid entertainment would take the plan over the $120 budget.'},
+ B:{reason:'e.g., The fact card says there is no weekend study, so a Saturday review does not fit.',omission:'e.g., It did not deal with the learner\'s difficulty with fractions.',
+  goal:'e.g., Prepare an adult learner for an introductory statistics test in four weeks.',audience:'e.g., An adult returning to study who finds fractions hard.',facts:'e.g., - Test topics: averages, graphs, basic probability.',constraints:'e.g., - 30 minutes each weekday only.',output:'e.g., A week-by-week plan of 30-minute weekday sessions.',criteria:'e.g., A realistic workload with checks of independent understanding.',missing:'e.g., Ask me about the test format instead of guessing it.',
+  acc:'e.g., Weekend sessions are gone, matching the fact card.',feas:'e.g., Every session now fits in 30 minutes.',rel:'e.g., It now covers all three test topics.',unc:'e.g., It asks about the test format instead of setting score targets.',use:'e.g., The learner could start this plan on Monday.',
+  reflection:'e.g., Mentioning fractions changed week 1. I still need to check the free resources match the test.',sug:'e.g., Add a fractions refresher at the start of week 1.',decReason:'e.g., Adapt: a full test will not fit in 30 minutes, so I will use a five-question check.'}
+};
+/* ---------- State ---------- */
+const KEY='working-better-with-ai-v2';
+const SL=['A','B'];
+const CRIT=[['acc','Accuracy against the facts'],['feas','Feasibility'],['rel','Relevance'],['unc','Handling of uncertainty'],['use','Usefulness']];
+const BF=[['goal','Goal'],['audience','Audience'],['facts','Relevant facts'],['constraints','Constraints'],['output','Requested output'],['criteria','Success criteria'],['findings','Problems to fix from the previous answer'],['missing','Missing information and assumptions']];
+const ASSUME_LINE='Identify any assumptions you make and list them separately.';
+const MISSING_LINE='Ask me for any missing information instead of inventing it.';
+const blankClaim=()=>({text:'',type:'',verdict:'',reason:''});
+function blankEval(){const c={};CRIT.forEach(([k])=>c[k]={r:'',why:''});
+ return {step:0,tool:'',initMode:'',initResp:'',units:[],unitsFrom:'',omission:'',
+ b:{goal:'',audience:'',facts:'',constraints:'',output:'',criteria:'',findings:'',missing:''},chk:{facts:false,criteria:false,findings:false,assume:false,missing:false},fixed:'',fixedDraft:'',
+ prompt:'',promptEdited:false,showEx:false,revTool:'',revMode:'',revResp:'',cmp:c,reflection:'',reflEx:false,done:false};}
+function blankFb(){return {step:0,draftMode:'',draft:'',tool:'',fbMode:'',feedback:'',dec:[{sug:'',decision:'',reason:'',ex:false},{sug:'',decision:'',reason:'',ex:false}],revMode:'',revision:'',done:false};}
+function blankTu(){const c={};TU_CMP.forEach(([k])=>c[k]={r:'',why:''});const r=()=>({aMode:'',ai:'',me:'',sent:false});return {step:0,dMode:'',direct:'',adds:{hint:false,one:false,attempt:false,explain:false,check:false,newq:false,short:false},attempt:'',prompt:'',promptEdited:false,rounds:[r(),r(),r()],cmp:c,reflection:'',reflEx:false,done:false};}
+function blankState(){const s={tab:'home',scen:'A',save:false,ev:{},fb:{},tu:{},tuSel:'t1',
+ as:{ex:'',s1:'',s2:'',s3:'',s4:'',task:'',ai:'',verify:'',evidence:'',demo:'',dataAns:'',showData:false,tp:{step:0,sec:'education',d:{}}},tk:{one:'',two:'',three:''}};
+ SL.forEach(k=>{s.ev[k]=blankEval();s.fb[k]=blankFb();});Object.keys(TUTOR).forEach(k=>s.tu[k]=blankTu());return s;}
+let state=blankState();
+function merge(base,saved){if(saved&&typeof saved==='object'&&!Array.isArray(saved)){for(const k in saved){if(base[k]&&typeof base[k]==='object'&&!Array.isArray(base[k]))merge(base[k],saved[k]);else base[k]=saved[k];}}return base;}
+let storageOK=true;
+try{const raw=localStorage.getItem(KEY);if(raw){const d=JSON.parse(raw);if(d&&d.save)state=merge(blankState(),d);}}catch(e){storageOK=false;}
+let saveT;
+function save(){if(!state.save)return;clearTimeout(saveT);saveT=setTimeout(()=>{try{localStorage.setItem(KEY,JSON.stringify(state));}catch(e){storageOK=false;}},300);}
+function get(p){return p.split('.').reduce((o,k)=>o==null?o:o[k],state);}
+function set(p,v){const ks=p.split('.');let o=state;for(let i=0;i<ks.length-1;i++)o=o[ks[i]];o[ks[ks.length-1]]=v;}
+
+/* ---------- Helpers ---------- */
+const $=(s,r=document)=>r.querySelector(s);
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const fid=k=>'f_'+k.replace(/[^a-z0-9]/gi,'_');
+const has=s=>!!(s&&String(s).trim());
+function toast(msg){const t=document.createElement('div');t.className='toast';t.setAttribute('role','status');t.textContent=msg;document.body.appendChild(t);setTimeout(()=>t.remove(),2200);$('#live').textContent=msg;}
+function ta(k,label,o={}){const id=fid(k);return `<label class="lbl" for="${id}">${label}${o.hint?` <span class="hint">${o.hint}</span>`:''}</label><textarea id="${id}" data-k="${k}" class="${o.cls||''}"${o.ph?` placeholder="${esc(o.ph)}"`:''}${o.ro?' readonly':''}>${esc(get(k))}</textarea>`;}
+function inp(k,label,o={}){const id=fid(k);return `<label class="lbl" for="${id}">${label}${o.hint?` <span class="hint">${o.hint}</span>`:''}</label><input type="text" id="${id}" data-k="${k}" value="${esc(get(k))}"${o.ph?` placeholder="${esc(o.ph)}"`:''}>`;}
+function radios(k,legend,opts,extra=''){const id=fid(k);const v=get(k);return `<fieldset><legend>${legend}</legend><div class="radios">${opts.map(([val,lab])=>`<label for="${id}_${val}"><input type="radio" id="${id}_${val}" name="${id}" value="${val}" data-k="${k}" ${extra} ${v===val?'checked':''}>${lab}</label>`).join('')}</div></fieldset>`;}
+function sel(k,label,opts,extra=''){const id=fid(k);const v=get(k);return `<label class="lbl" for="${id}">${label}</label><select id="${id}" data-k="${k}" ${extra}><option value="">Choose…</option>${opts.map(o=>`<option ${v===o?'selected':''}>${esc(o)}</option>`).join('')}</select>`;}
+function chk(k,label,act){const id=fid(k);return `<label for="${id}"><input type="checkbox" id="${id}" data-k="${k}"${act?` data-act="${act}"`:''} ${get(k)?'checked':''}><span>${label}</span></label>`;}
+function why(title,html){return `<details class="why"><summary>${title||'Why this matters'}</summary><div>${html}</div></details>`;}
+function pairTip(){return '';}
+const ph=k=>(PH[state.scen]||PH.A)[k];
+const MODE3=[['prepared','Use a prepared example'],['paste','Paste my own AI response'],['write','Write my own response']];
+const MODE2=[['prepared','Use a prepared example'],['paste','Paste my own AI response']];
+
+/* Prepared text registry */
+const fmtFeedback=s=>'Feedback on the draft, using the criteria:\n\n'+SCEN[s].fb.suggestions.map((g,i)=>`${i+1}. ${g.text}`).join('\n');
+const PREP={
+ evInit:s=>SCEN[s].initialResponse, evRev:s=>SCEN[s].improvedResponse,
+ fbDraft:s=>SCEN[s].fb.draft, fbFeedback:fmtFeedback, fbRevision:s=>SCEN[s].fb.revisedExample
+};
+
+/* Source boxes: which kind of text is shown */
+function srcInfo(mode,text,prep,tool,kind){
+ if(mode==='prepared'){
+  const edited=has(text)&&text!==prep;
+  if(kind==='ai')return {cls:'prep',tag:'Prepared illustrative AI response'+(edited?', edited by you':''),note:'Written in advance for this workshop. It was not generated live and this page does not call any AI service.'};
+  if(kind==='fb')return {cls:'prep',tag:'Prepared illustrative AI feedback'+(edited?', edited by you':''),note:'Written in advance for the prepared draft. It has not read any text you wrote.'};
+  if(kind==='draft')return {cls:'rev',tag:'Prepared example draft'+(edited?', edited by you':''),note:'A short learner draft written for this workshop.'};
+  if(kind==='stu')return {cls:'rev',tag:'Example student response'+(edited?', edited by you':''),note:'Written for this workshop to show what a student might submit.'};
+  if(kind==='rev')return {cls:'rev',tag:'Example revised work'+(edited?', edited by you':''),note:'One possible revision of the prepared draft, written in advance. Yours can differ.'};
+ }
+ if(mode==='paste')return {cls:'pasted',tag:`AI response pasted by you${tool&&tool!=='Prepared example'?' from '+esc(tool):''}`,note:'This page has not checked or evaluated this text.'};
+ if(mode==='fromDraft')return {cls:'own',tag:'Your revision, starting from the draft',note:''};
+ if(mode==='write')return {cls:'own',tag:kind==='draft'?'Your own draft':kind==='rev'?'Your own revision':'Written by you',note:''};
+ return null;
+}
+function srcBox(modeKey,textKey,prepKey,toolKey,kind,label,o={}){
+ const s=state.scen,mode=get(modeKey),text=get(textKey),prep=PREP[prepKey](s);
+ const info=srcInfo(mode,text,prep,toolKey?get(toolKey):'',kind);
+ const id=fid(textKey);
+ if(!mode)return `<p class="note">Choose an option above to fill or start this box.</p>`;
+ return `<div class="src ${info.cls}"><span class="tag">${info.tag}</span>${info.note?`<div class="note">${info.note}</div>`:''}
+ <label class="lbl" for="${id}">${label}</label><textarea id="${id}" data-k="${textKey}" class="${o.cls||'tall'}"${o.ph?` placeholder="${esc(o.ph)}"`:''}>${esc(text)}</textarea></div>`;
+}
+function aiBar(copyFrom,toolKey,label){
+ return `<div class="aibar"><p class="note" style="margin-top:0">Copy your prompt, open your preferred AI tool, then paste its response back here. These buttons open external services. They do not send your text automatically.</p>
+ <div class="row"><button type="button" class="btn primary" data-do="copy" data-from="${copyFrom}">Copy prompt</button>
+ ${PLATFORMS.map(p=>`<a class="btn" href="${p.url}" target="_blank" rel="noopener noreferrer">${p.label}<span class="sr"> (opens in a new tab)</span></a>`).join('')}</div>
+ <p class="note">Some tools need you to sign in, and availability or cost can change. Your work here stays in this tab.</p>
+ </div>`;
+}
+function factCard(s,open){const S=SCEN[s];return `<details class="why" ${open?'open':''}><summary>Fact card and success criteria: ${esc(S.name)}</summary><div><div class="facts"><div><h4>Facts</h4><ul>${S.facts.map(f=>`<li>${esc(f)}</li>`).join('')}</ul></div><div><h4>Constraints</h4><ul>${S.constraints.map(f=>`<li>${esc(f)}</li>`).join('')}</ul></div></div><p><strong>Success criteria:</strong> ${esc(S.criteria)}</p></div></details>`;}
+function scenBar(){return `<div class="scenbar"><label for="f_scen">Scenario</label><select id="f_scen" data-k="scen" data-rerender="1">${SL.map(k=>`<option value="${k}" ${state.scen===k?'selected':''}>${k}: ${esc(SCEN[k].name)}</option>`).join('')}</select><span class="note">Switching keeps your work in each scenario.</span></div>${scenAbout()}`;}
+const SCEN_ABOUT={
+ A:'You are helping organise a 60-minute event where twenty adults who have never met get to know one another. There is a $120 budget, a free room, two volunteers and no kitchen. Every activity must work seated, and some people are not confident speaking in a group. Food preferences and language needs are still unknown. Your job is to judge whether the AI\'s suggestions fit these facts.',
+ B:'You are helping an adult who is returning to study prepare for an introductory statistics test in four weeks, covering averages, graphs and basic probability. They can study for 30 minutes each weekday but not at weekends, they find fractions hard and they can only use free resources. They want to understand the methods, not just get answers. Your job is to judge whether the AI\'s suggestions fit this learner.'
+};
+function scenAbout(){const S=SCEN[state.scen];return `<div class="soft" style="margin-top:0" aria-live="polite"><p style="margin:0 0 .4rem"><strong>About this scenario: ${esc(S.name)}.</strong> ${esc(SCEN_ABOUT[state.scen])}</p><p class="note" style="margin:0"><strong>A good answer will have:</strong> ${esc(S.criteria.charAt(0).toLowerCase()+S.criteria.slice(1))}</p></div>`;}
+function stepper(names,cur,act,doneUpTo){return `<nav aria-label="Activity steps"><div class="stepper">${names.map((n,i)=>`<button type="button" data-do="${act}" data-n="${i}" ${i===cur?'aria-current="step"':''} class="${i<cur?'done':''}"><span class="n">${i+1}</span>${n}${i<cur?'<span class="sr"> (visited)</span>':''}</button>`).join('')}</div></nav>`;}
+function navRow(act,cur,max,nextLabel){return `<div class="navrow">${cur>0?`<button type="button" class="btn ghost" data-do="${act}" data-n="${cur-1}">Back</button>`:'<span></span>'}${cur<max?`<button type="button" class="btn primary" data-do="${act}" data-n="${cur+1}">${nextLabel||'Next step'}</button>`:''}</div><div id="gateMsg" role="alert"></div>`;}
+
+/* Word diff for visible revisions */
+function diffHTML(a,b){const A=a.split(/(\s+)/).filter(x=>x!==''),B=b.split(/(\s+)/).filter(x=>x!=='');
+ if(A.length*B.length>400000)return esc(b);
+ const n=A.length,m=B.length,L=Array.from({length:n+1},()=>new Uint16Array(m+1));
+ for(let i=n-1;i>=0;i--)for(let j=m-1;j>=0;j--)L[i][j]=A[i]===B[j]?L[i+1][j+1]+1:Math.max(L[i+1][j],L[i][j+1]);
+ let i=0,j=0,out='';while(i<n&&j<m){if(A[i]===B[j]){out+=esc(A[i]);i++;j++;}else if(L[i+1][j]>=L[i][j+1]){out+=/^\s+$/.test(A[i])?esc(A[i]):`<del>${esc(A[i])}</del>`;i++;}else{out+=/^\s+$/.test(B[j])?esc(B[j]):`<ins>${esc(B[j])}</ins>`;j++;}}
+ while(i<n){out+=/^\s+$/.test(A[i])?'':`<del>${esc(A[i])}</del>`;i++;}while(j<m){out+=/^\s+$/.test(B[j])?esc(B[j]):`<ins>${esc(B[j])}</ins>`;j++;}return out.replace(/<\/ins>(\s+)<ins>/g,'$1').replace(/<\/del>(\s+)<del>/g,'$1');}
+
+/* Split an AI response into meaningful sentences (ported from the activity engine) */
+function splitSentences(txt){const out=[];
+ txt.replace(/\r/g,'').split(/\n+/).forEach(raw=>{
+  const line=raw.replace(/\*\*|__|`/g,'').replace(/^\s*(#+|[-*•·]|\d+[.)])\s+/,'').trim();if(!line)return;
+  let cur='';
+  for(let i=0;i<line.length;i++){const ch=line[i];cur+=ch;
+   if('.!?'.includes(ch)){let j=i+1;while(j<line.length&&/["”')\]]/.test(line[j])){cur+=line[j];j++;}
+    if(j<line.length&&/\s/.test(line[j])){let k=j;while(k<line.length&&/\s/.test(line[k]))k++;
+     if(k<line.length&&/["“'(\[A-Z0-9$]/.test(line[k])&&!/\b(e\.g|i\.e|etc|vs|approx)\.$/i.test(cur)){out.push(cur.trim());cur='';i=k-1;continue;}}
+    i=j-1;}}
+  if(cur.trim())out.push(cur.trim());});
+ /* drop headings and fragments: no end punctuation, no figures, few words, or ending in a colon */
+ return out.filter(p=>{const w=p.split(/\s+/).length;if(p.length<8)return false;if(/:$/.test(p))return false;if(!/[.!?)"”]$/.test(p)&&!/\d/.test(p)&&w<=8)return false;return true;}).slice(0,120);}
+const norm=s=>s.toLowerCase().replace(/[^a-z0-9$% ]/g,' ').replace(/\s+/g,' ').trim();
+/* Findings from Verify, used to improve the prompt and to check the revised response */
+const trimDot=t=>String(t||'').trim().replace(/[.\s]+$/,'');
+/* first sentence of a reason, starting lower case, for use after a colon */
+const brief=t=>{let x=String(t||'').trim().split(/(?<=[.!?])\s+(?=[A-Z])/)[0];x=trimDot(x);return /^[A-Z][a-z]/.test(x)?x[0].toLowerCase()+x.slice(1):x;};
+function findingsOf(e){return e.units.filter(u=>u.sel&&(u.verdict==='Unsupported'||u.verdict==='Uncertain'));}
+function findingsText(e){return findingsOf(e).map(u=>u.verdict==='Unsupported'
+ ?`- Your previous answer said: "${trimDot(u.text)}". I judged this unsupported${has(u.reason)?': '+brief(u.reason):' against the facts'}. Correct it so it fits the facts.`
+ :`- Your previous answer said: "${trimDot(u.text)}". I judged this uncertain${has(u.reason)?': '+brief(u.reason):' because the facts do not confirm it'}. Do not assume it; say what needs to be found out.`).join('\n');}
+const OUTCOME={
+ A:[['90 minutes','Fixed: the revised agenda adds up to exactly 60 minutes.'],['human bingo','Fixed: every activity in the revised plan is seated; the walking game has gone.'],['walks around the room','Fixed: every activity in the revised plan is seated; nobody needs to walk around the room.'],['whole group','Fixed: introductions now happen at tables, and people can pass or write their answer instead.'],['140','Fixed: the itemised costs now total $120, within the budget.'],['vegetarian','Handled: food preferences are now listed as unresolved, to be asked on the registration form before buying food.'],['prizes','Fixed: prizes are no longer in the plan, and costs stay within $120.'],['snacks and drinks','Fixed: food and drinks now cost $70 ($45 plus $25), and the total stays within $120.']],
+ B:[['week 1: averages','Fixed: week 1 now starts with a fractions refresher before moving on to the mean.'],['saturday','Fixed: the revised plan has no weekend study.'],['45 minutes','Fixed: every session is now 30 minutes.'],['80%','Handled: the revised plan sets no score target without a baseline, and uses the first Friday check to get one.'],['premium subscription','Fixed: the revised plan uses free resources only.'],['every second day','Fixed: replaced by daily mixed practice sets and one timed set in week 4, each within 30 minutes.'],['video lessons','Fixed: sessions now centre on working problems and explaining answers, not watching videos.'],['study with a friend','Not addressed: the revised plan does not mention studying with a friend; it is still an optional idea.']]};
+const STILL={A:'Still to check: real local prices, and food preferences and language needs once people register.',B:'Still to check: whether the free resources match the test topics, and what format the test takes.'};
+function outcomeFor(s,text){const n=norm(text);const hit=(OUTCOME[s]||[]).find(([k])=>n.includes(norm(k)));return hit?hit[1]:null;}
+/* Divide AI feedback into separate suggestions (numbered or bulleted items, otherwise sentences) */
+function extractSuggestions(t){const lines=String(t||'').replace(/\r/g,'').split('\n').map(l=>l.replace(/\*\*|__|`/g,'').trim()).filter(Boolean);const mark=/^(\d+[.)]|[-*•·])\s+/;
+ const items=lines.filter(l=>mark.test(l)).map(l=>l.replace(mark,'').replace(/\*\*|__|`/g,'').trim()).filter(l=>l.length>=8&&!/:$/.test(l));
+ return items.length?items:splitSentences(t);}
+const blankDec=t=>({sug:t||'',decision:'',reason:'',ex:false});
+function ensureDec(f){if(!f.sugList)f.sugList=[];
+ if(f.sugFrom!==f.feedback&&!f.dec.some(d=>d.decision||has(d.reason))){f.sugList=extractSuggestions(f.feedback);f.dec=[0,1,2].map(i=>blankDec(f.sugList[i]));f.sugFrom=f.feedback;}
+ while(f.dec.length<3)f.dec.push(blankDec(''));}
+function prepClaimFor(s,text){const n=norm(text);if(n.length<8)return null;return SCEN[s].claims.find(c=>{const m=norm(c.text);return n.includes(m)||m.includes(n)&&n.length>m.length*0.8;})||null;}
+/* ---------- Strategies (home) ---------- */
+const STRATS=[
+ {id:'eval',name:'Evaluate and improve',chain:'Ask → Analyse → Verify → Improve → Reflect',desc:'Get an AI response, choose the sentences that matter, check each one against the facts, then improve your prompt and compare.'},
+ {id:'fb',name:'Feedback and revision',chain:'Feedback → Decide → Revise',desc:'Treat AI feedback as suggestions. Accept, adapt or reject each one with a reason, then revise your work.'},
+ {id:'tutor',name:'AI as a tutor',chain:'Ask directly → Ask for hints → Compare → Reflect',desc:'Ask AI a question directly, then turn it into a tutor that gives hints instead of answers. Work through the problem yourself and compare the two approaches.'},
+ {id:'assess',name:'AI for assessment design',chain:'Task → AI contribution → Verification → Evidence → Demonstration',desc:'Turn these strategies into an assessment for your own subject, where students show their judgement, not just the AI\'s output.'}
+];
+function tabDone(t){if(t==='eval')return SL.some(k=>state.ev[k].done);if(t==='fb')return SL.some(k=>state.fb[k].done);if(t==='tutor')return Object.values(state.tu).some(x=>x.done);if(t==='assess')return has(state.as.task)||has(state.as.s1);return false;}
+function renderTabs(){}
+function renderStart(){
+ return `<div class="view">
+ <section class="event" aria-labelledby="evTitle">
+  <p class="event-kicker">Victoria University, VU Digital Community of Practice</p>
+  <p class="event-date">Friday 20 November 2026</p>
+  <p class="event-theme" id="evTitle">Engage + Evolve: AI &amp; Student Engagement</p>
+  <div class="event-session">
+   <p class="event-label">Made for the session</p>
+   <p class="event-talk">From AI Users to Critical Thinkers: Integrating Gen AI into Active Learning. A Case Study in Data Science</p>
+   <p class="event-who">Parham Moradi, Senior Lecturer in IT, Victoria University</p>
+  </div>
+  <p class="event-note">This hands-on companion lets you try the strategies from the talk for yourself, during the session or afterwards. Bring your questions: each session includes time to talk, share and learn from each other. Also presenting: Daniel Laurence, Senior Learning Designer, with Part 2 of AIBS (Artificial Intelligent Branching Scenarios).</p>
+ </section>
+ <h2 tabindex="-1" id="pageH">Welcome</h2>
+ <p class="lead">There are several strategies for bringing AI into the learning space. In this workshop we practise four of them, drawn from integrating Gen AI into active learning in data science and adapted here for any subject. In each one you use AI, then judge what it produced against evidence.</p>
+ <p class="q">What can AI contribute, and what thinking must the learner still do?</p>
+ <h3>Four strategies</h3>
+ <div class="home">${STRATS.map((x,i)=>`<div class="scard"><h3>${i+1}. ${x.name}</h3><p class="chain">${x.chain}</p><p>${x.desc}</p>${tabDone(x.id)?'<p class="status">✓ Started</p>':''}<div><button type="button" class="btn primary" data-do="tab" data-t="${x.id}">Practise this strategy<span class="sr">: ${x.name}</span></button></div></div>`).join('')}
+ <div class="takecard"><div><h3>My takeaways</h3><p style="margin:.2rem 0 0">Your notes from every strategy in one place, to download or print.</p></div><button type="button" class="btn" data-do="tab" data-t="take">Open my takeaways</button></div></div>
+ <div class="soft"><p style="margin:0"><strong>Before you start.</strong> Use fictional or approved information only. This page does not collect names, send your entries anywhere or call any AI service. Adding your name to a PDF is optional and stays in that file. The AI buttons open other websites in a new tab; you copy and paste between them yourself.</p></div></div>`;
+}
+function stratHead(id){const i=STRATS.findIndex(x=>x.id===id),x=STRATS[i];
+ return `<button type="button" class="btn small ghost back" data-do="tab" data-t="home">Back to all strategies</button>
+ <h2 tabindex="-1" id="pageH">Strategy ${i+1}: ${x.name}</h2><p class="chain" style="margin-top:0">${x.chain}</p>`;}
+function nextStrat(id){const i=STRATS.findIndex(x=>x.id===id),n=STRATS[i+1];
+ return `<div class="navrow"><button type="button" class="btn ghost" data-do="tab" data-t="home">Back to all strategies</button>${n?`<button type="button" class="btn primary" data-do="tab" data-t="${n.id}">Practise the next strategy: ${n.name}</button>`:`<button type="button" class="btn primary" data-do="tab" data-t="take">Open my takeaways</button>`}</div>`;}
+
+/* ---------- Evaluate and improve ---------- */
+const EV_STEPS=['Ask','Analyse','Verify','Improve','Compare and reflect','What you learned'];
+function ensureUnits(e){if(e.unitsFrom===e.initResp)return;
+ const busy=e.units.some(u=>u.verdict||has(u.reason));if(busy)return;
+ e.units=splitSentences(e.initResp||'').map(t=>({text:t,sel:false,type:'',verdict:'',reason:'',ex:false}));pickRandom(e.units,5);e.unitsFrom=e.initResp;}
+/* Start students off with up to 5 sentences chosen at random, so they must read and think about the whole response */
+function pickRandom(units,n){units.forEach(u=>u.sel=false);const idx=units.map((_,i)=>i);for(let i=idx.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[idx[i],idx[j]]=[idx[j],idx[i]];}idx.slice(0,n).forEach(i=>units[i].sel=true);}
+function renderEval(){
+ const s=state.scen,e=state.ev[s],S=SCEN[s],st=e.step;
+ let h=`<div class="view">${stratHead('eval')}${scenBar()}${stepper(EV_STEPS,st,'evStep')}`;
+ if(st===0){
+  h+=`<h3>Step 1: Ask</h3>
+  <p class="measure">Get an AI response to the prompt below. You will then check it sentence by sentence. You do not have to find an error: a well-justified "supported" is a good outcome.</p>
+  <h4 style="margin-bottom:.3rem">Initial prompt</h4><div class="promptbox" id="initPrompt">${esc(S.initialPrompt)}</div>
+  <p class="note">This prompt deliberately leaves out the fact card. Later you will add context and compare.</p>
+  ${aiBar('initPrompt',`ev.${s}.tool`,'Tool used for the initial response')}
+  ${radios(`ev.${s}.initMode`,'Initial AI response',MODE2,`data-mode="1" data-target="ev.${s}.initResp" data-prep="evInit" data-tool="ev.${s}.tool"`)}
+  ${e.initMode==='prepared'?`<p class="note"><strong>What this AI supposedly received:</strong> ${esc(S.initialReceived)} Differences from the facts show the value of supplying context; they are not proof that the AI ignored instructions.</p>`:''}
+  ${srcBox(`ev.${s}.initMode`,`ev.${s}.initResp`,'evInit',`ev.${s}.tool`,'ai','Initial AI response',{ph:'e.g., Paste the full response from your AI tool here, including any lists.'})}
+  ${factCard(s,false)}`;
+ }
+ if(st===1){
+  ensureUnits(e);const stale=e.unitsFrom!==e.initResp;const n=e.units.filter(u=>u.sel).length;
+  h+=`<h3>Step 2: Analyse</h3>
+  <p class="measure">The response has been divided into sentences, and ${Math.min(5,e.units.length)} ${e.units.length>5?'have been chosen at random':'(all of them) have been ticked'} for you to check. Read the whole response first. Untick any that do not matter, and tick others that do, especially claims or recommendations that would cause problems if they were wrong. You can choose as many as you like.</p>
+  ${stale?`<p class="err">The response has changed since it was divided. Divide it again to update the list (your ticks and verdicts will be cleared).</p>`:''}
+  <div class="row">${e.initMode==='prepared'&&!stale?`<button type="button" class="btn small" data-do="prepSel">Tick the prepared example selections</button>`:''}
+  <button type="button" class="btn small ghost" data-do="resplit">Divide the response again</button>
+  <button type="button" class="btn small ghost" data-do="randomSel">Choose 5 at random again</button>
+  <button type="button" class="btn small ghost" data-do="selAll">Tick all sentences</button>
+  <button type="button" class="btn small ghost" data-do="clearSel">Clear all ticks</button></div>
+  <p class="note" aria-live="polite" id="selCount">${n} sentence${n===1?'':'s'} selected out of ${e.units.length}.</p>
+  ${e.units.length?`<ul class="units">${e.units.map((u,i)=>`<li><label for="${fid(`ev.${s}.units.${i}.sel`)}"><input type="checkbox" id="${fid(`ev.${s}.units.${i}.sel`)}" data-k="ev.${s}.units.${i}.sel" data-norender="1" ${u.sel?'checked':''}><span class="num">${i+1}</span><span>${esc(u.text)}</span></label></li>`).join('')}</ul>`:'<p class="err">There is no response to divide yet. Go back to Ask.</p>'}
+  <div class="panel"><label class="lbl" for="addUnit" style="margin-top:0">Add a sentence the division missed <span class="hint">(optional)</span></label>
+  <div class="row"><input type="text" id="addUnit" placeholder="e.g., copy a sentence from the response that is not in the list" style="flex:1;min-width:12rem"><button type="button" class="btn small" data-do="addUnit">Add and tick</button></div></div>
+  ${why('Why sentence by sentence?','<p>A fluent answer is easy to accept or reject as a whole. Judging one sentence at a time shows exactly which parts fit the facts and which do not. You can correct the wording of any sentence in the next step if the division went wrong.</p>')}`;
+ }
+ if(st===2){
+  h+=`<h3>Step 3: Verify</h3>
+  <div class="soft"><p style="margin:0"><span class="pill Supported">Supported</span> consistent with the facts and relevant criteria. <span class="pill Uncertain">Uncertain</span> needs information or evidence we do not yet have. <span class="pill Unsupported">Unsupported</span> conflicts with the facts or lacks adequate justification.</p></div>
+  <p class="measure">Give every selected sentence a verdict. Adding a short reason that points to the fact card or criteria is optional, but it makes your judgement clear.</p>
+  ${factCard(s,false)}
+  ${e.units.map((u,i)=>{if(!u.sel)return '';const pc=prepClaimFor(s,u.text);
+   return `<div class="claim"><h3>Sentence ${i+1}</h3>${ta(`ev.${s}.units.${i}.text`,'Sentence',{cls:'short',hint:'(edit if the division went wrong)',ph:'e.g., Total estimated cost: $140.'})}
+   ${radios(`ev.${s}.units.${i}.type`,'What kind of statement is it?'+helpBtn('type'),[['Factual claim','Factual claim'],['Recommendation','Recommendation']])}
+   ${radios(`ev.${s}.units.${i}.verdict`,'Verdict'+helpBtn('verdict'),[['Supported','Supported'],['Uncertain','Uncertain'],['Unsupported','Unsupported']])}
+   ${ta(`ev.${s}.units.${i}.reason`,'Reason and evidence <span class="hint">(optional)</span>',{cls:'short',ph:ph('reason')})}
+   ${pc?`<div class="checks">${chk(`ev.${s}.units.${i}.ex`,'Load an example evidence statement','exEvidence')}</div>${u.ex?`<div class="src judg"><span class="tag">Example learner judgement</span><div><strong>${pc.verdict}.</strong> ${esc(pc.evidence)}</div></div>`:''}`:''}</div>`;}).join('')||'<p class="err">No sentences selected yet. Go back to Analyse.</p>'}
+  ${ta(`ev.${s}.omission`,'What should the response have said but did not?',{cls:'short',hint:'(optional)',ph:ph('omission')})}
+  ${why('Show an example answer',`<div class="src judg"><span class="tag">Example learner judgement</span><div>${esc(S.omission)}</div></div>`)}`;
+ }
+ if(st===3){
+  if(!has(e.prompt)){e.prompt=fullPrompt(s);e.promptEdited=false;}
+  const exReady=has(e.prompt)&&e.prompt.trim()!==S.initialPrompt.trim();
+  h+=`<h3>Step 4: Improve</h3>
+  <p class="measure">Your improved prompt starts from the initial prompt. Each box you tick and each field you fill is added to it, so you can see exactly what you improved. You can also edit the full prompt directly.</p>
+  ${(()=>{const F=findingsOf(e);return `<div class="soft"><h4 style="margin:0 0 .3rem;color:var(--navy)">Your findings from Verify</h4>${F.length?`<ul style="margin:.2rem 0;padding-left:1.2rem">${F.map(u=>`<li><span class="pill ${u.verdict}">${u.verdict}</span> ${esc(u.text)}${has(u.reason)?`<br><span class="note">Your reason: ${esc(u.reason)}</span>`:''}</li>`).join('')}</ul><p class="note" style="margin:.3rem 0 0">Tick "Ask AI to fix the problems I found in Verify" to add these to your prompt.</p>`:'<p class="note" style="margin:0">You did not mark any sentence Unsupported or Uncertain. You can still improve the prompt by adding context.</p>'}</div>`;})()}
+  <fieldset class="checks"><legend>Insert scenario details</legend>
+   ${chk(`ev.${s}.chk.facts`,'Include the scenario facts in my prompt','bFacts')}
+   ${chk(`ev.${s}.chk.criteria`,'Include the success criteria','bCrit')}
+   ${chk(`ev.${s}.chk.assume`,'Ask AI to identify assumptions','bAssume')}
+   ${chk(`ev.${s}.chk.missing`,'Ask AI to request missing information','bMissing')}
+   ${chk(`ev.${s}.chk.findings`,'Ask AI to fix the problems I found in Verify','bFindings')}
+  </fieldset>
+  <div class="two"><div>${ta(`ev.${s}.b.goal`,'Goal',{cls:'short',ph:ph('goal')})}</div><div>${ta(`ev.${s}.b.audience`,'Audience',{cls:'short',ph:ph('audience')})}</div></div>
+  <div class="two"><div>${ta(`ev.${s}.b.facts`,'Relevant facts',{cls:'short',ph:ph('facts').replace(/\\n/g,'\n')})}</div><div>${ta(`ev.${s}.b.constraints`,'Constraints',{cls:'short',ph:ph('constraints')})}</div></div>
+  <div class="two"><div>${ta(`ev.${s}.b.output`,'Requested output',{cls:'short',ph:ph('output')})}</div><div>${ta(`ev.${s}.b.criteria`,'Success criteria',{cls:'short',ph:ph('criteria')})}</div></div>
+  ${ta(`ev.${s}.b.findings`,'Problems to fix from the previous answer',{cls:'short',ph:'e.g., - Your previous answer said: "Programme (about 90 minutes)". The event is 60 minutes. Correct this.'})}
+  ${ta(`ev.${s}.b.missing`,'Missing information and assumptions',{cls:'short',ph:ph('missing')})}
+  ${ta(`ev.${s}.prompt`,'Your improved prompt',{cls:'tall',hint:'(the initial prompt plus everything you add)',ph:'e.g., Goal: … Audience: … Relevant facts: … (this fills in as you complete the fields above)'})}
+  <details class="why" open><summary>What you added to the initial prompt</summary><div><div class="pre diff soft" id="promptDiff" aria-live="polite">${exReady?diffHTML(S.initialPrompt,e.prompt):'<em>Nothing added yet. Tick a box or fill in a field.</em>'}</div><p class="note">Green shows what you added. Red with a line through shows anything you removed from the initial prompt.</p></div></details>
+  <div class="row"><button type="button" class="btn small ghost" data-do="suggest">Suggest wording for empty goal, audience and output</button><button type="button" class="btn small ghost" data-do="rebuild">Rebuild prompt from the fields</button>
+  <button type="button" class="btn small" data-do="showEx" id="showExBtn" ${exReady?'':'disabled'}>Show an example improved prompt</button>${exReady?'':'<span class="note" id="showExNote">Available after you start your prompt.</span>'}</div>
+  ${e.showEx?`<div class="src prep"><span class="tag">Prepared example improved prompt</span><div class="pre">${esc(S.improvedPrompt)}</div><div class="row" style="margin-top:.5rem"><button type="button" class="btn small" data-do="useEx">Use this example as my prompt</button></div></div>`:''}
+  ${aiBar(fid(`ev.${s}.prompt`),`ev.${s}.revTool`,'Tool used for the revised response')}
+  ${radios(`ev.${s}.revMode`,'Revised AI response',MODE2,`data-mode="1" data-target="ev.${s}.revResp" data-prep="evRev" data-tool="ev.${s}.revTool"`)}
+  ${e.revMode==='prepared'?`<p class="note"><strong>What this AI supposedly received:</strong> ${esc(S.improvedReceived)}${e.prompt.trim()!==S.improvedPrompt.trim()?' It was written for that example, not for your own prompt.':''}</p>`:''}
+  ${srcBox(`ev.${s}.revMode`,`ev.${s}.revResp`,'evRev',`ev.${s}.revTool`,'ai','Revised AI response',{ph:'e.g., Paste the full response to your improved prompt here.'})}`;
+ }
+ if(st===4){
+  const col=(t,p,r,m,tool)=>{const i=srcInfo(m,r,'',tool,'ai');return `<div class="cmpcol"><h3>${t}</h3><h4 style="margin:.3rem 0">Prompt</h4><div class="pre" tabindex="0" role="region" aria-label="${t} prompt">${esc(p)||'<em>Not written yet</em>'}</div><h4 style="margin:.6rem 0 .3rem">Response ${i?`<span class="hint">(${i.tag.replace(', edited by you','')})</span>`:''}</h4><div class="pre" tabindex="0" role="region" aria-label="${t} response">${esc(r)||'<em>Not added yet</em>'}</div></div>`;};
+  h+=`<h3>Step 5: Compare and reflect</h3>
+  <div class="two">${col('Initial',S.initialPrompt,e.initResp,e.initMode,e.tool)}${col('Revised',e.prompt,e.revResp,e.revMode,e.revTool)}</div>
+  <p class="measure" style="margin-top:1rem">Judge the revised response against the initial one. Length is not quality, and "Not sure" is a fair answer.</p>
+  ${CRIT.map(([k,l])=>`<div class="claim">${radios(`ev.${s}.cmp.${k}.r`,l+helpBtn('c_'+k),[['Better','Better'],['Similar','Similar'],['Worse','Worse'],['Not sure','Not sure']])}${inp(`ev.${s}.cmp.${k}.why`,'Why?',{ph:ph(k)})}</div>`).join('')}
+  <div class="panel"><h3 style="margin-top:0">Were the problems you found fixed in the revised response?${helpBtn('fixed')}</h3>
+  <p class="measure">Look back at the sentences you marked Unsupported or Uncertain. Prepare a draft from your verdicts, then check it against the revised response and edit it.</p>
+  <button type="button" class="btn small" data-do="draftFixed">Prepare a draft from my verdicts</button>
+  ${ta(`ev.${s}.fixed`,'Your answer',{cls:'tall',ph:'e.g., 1. "Programme (about 90 minutes)" was unsupported. Fixed: the revised agenda is 60 minutes.'})}
+  ${has(e.fixed)&&e.fixedDraft?`<div class="src ${e.fixedDraft==='prep'?'judg':'own'}" style="margin-top:.5rem"><span class="tag">Draft built from your verdicts</span><div class="note">${e.fixedDraft==='prep'?'The outcomes describe the prepared revised response. Check each one against the response above and change anything you disagree with.':'This page has not read your revised response. Replace each [bracketed] part with what you see in it.'}</div></div>`:''}</div>
+  ${ta(`ev.${s}.reflection`,'What improved because of your decisions, and what still needs checking?',{ph:ph('reflection')})}
+  <div class="checks">${chk(`ev.${s}.reflEx`,'Load an example reflection','reflEx')}</div>
+  ${e.reflEx?`<div class="src judg"><span class="tag">Example learner reflection</span><div>${esc(S.reflectionExample)}</div></div>`:''}`;
+ }
+ if(st===5)h+=evLearn(s)+nextStrat('eval');
+ h+=st<5?navRow('evStep',st,5,st===4?'See what you learned':'Next step'):navRow('evStep',st,5);
+ return h+'</div>';
+}
+function srcDesc(mode,tool){return mode==='prepared'?'a prepared illustrative response (written in advance, not generated live)':mode==='paste'?`a response you pasted from ${tool&&tool!=='Prepared example'?esc(tool):'an AI tool'}`:mode==='write'?'a response you wrote yourself (no AI)':'nothing recorded yet';}
+const nr='<em>Not recorded yet.</em>';
+function evLearn(s){const e=state.ev[s],S=SCEN[s];
+ const done=e.units.filter(u=>u.sel&&u.verdict);
+ const fields=BF.filter(([k])=>has(e.b[k])).map(([,l])=>l.toLowerCase());
+ const cmp=CRIT.filter(([k])=>e.cmp[k].r).map(([k,l])=>`${l}: ${e.cmp[k].r}${has(e.cmp[k].why)?' ('+e.cmp[k].why.trim()+')':''}`);
+ return `<div class="learn"><h3>What you learned: ${esc(S.name)}</h3><dl>
+ <dt>AI contribution</dt><dd>Initial response: ${srcDesc(e.initMode,e.tool)}. Revised response: ${srcDesc(e.revMode,e.revTool)}.</dd>
+ <dt>Learner contribution</dt><dd><ul>
+  <li>You selected ${e.units.filter(u=>u.sel).length} of ${e.units.length} sentences as important.</li>
+  ${done.length?done.map(u=>`<li><span class="pill ${u.verdict}">${u.verdict}</span> ${esc(u.text.slice(0,110))}${u.text.length>110?'…':''}</li>`).join(''):`<li>Verdicts: ${nr}</li>`}
+  ${has(e.omission)?'<li>You named something the response left out.</li>':''}
+  <li>${fields.length?`Your prompt specified: ${fields.join(', ')}.`:has(e.prompt)?'You wrote the improved prompt directly.':'Improved prompt: '+nr}</li>
+  <li>${cmp.length?'Your comparison: '+esc(cmp.join('; '))+'.':'Comparison: '+nr}</li></ul></dd>
+ <dt>Evidence of learning</dt><dd>${done.some(u=>has(u.reason))?`<ul>${done.filter(u=>has(u.reason)).map(u=>`<li>You can explain why this was <strong>${u.verdict.toLowerCase()}</strong>: "${esc(u.reason)}"</li>`).join('')}</ul>`:nr}
+  ${has(e.fixed)?`<p><strong>Your check of the fixes:</strong></p><div class="pre soft">${esc(e.fixed)}</div>`:''}
+  ${has(e.reflection)?`<p><strong>Your reflection:</strong> ${esc(e.reflection)}</p>`:''}
+  <p class="note">This records what you did and decided. It does not show mastery on its own; an individual explanation or demonstration would.</p></dd>
+ <dt>How this could become an assessment requirement</dt><dd>${esc(S.assess)}</dd></dl>${pdfBtn()}</div>`;}
+function assemble(b){const out=[];BF.forEach(([k,l])=>{if(has(b[k])){const v=b[k].trim();out.push(v.includes('\n')||k==='facts'||k==='constraints'?`${l}:\n${v}`:`${l}: ${v}`);}});return out.join('\n\n');}
+/* ---------- Feedback and revision ---------- */
+const FB_STEPS=['Draft','Get feedback','Decide','Revise','What you learned'];
+function fbPrompt(s){const S=SCEN[s],f=state.fb[s];
+ return `Please give feedback on my draft using these criteria:\n${S.fb.criteria.map((c,i)=>`${i+1}. ${c}`).join('\n')}\n\nContext:\n${S.facts.concat(S.constraints).map(x=>'- '+x).join('\n')}\n\nGive no more than four suggestions. For each one, say which criterion it addresses and why. Do not rewrite the draft for me, and do not invent information that is not in the context.\n\nMy draft:\n${f.draft||'[paste your draft here]'}`;}
+function renderFb(){
+ const s=state.scen,f=state.fb[s],S=SCEN[s],st=f.step;const t=()=>'';
+ let h=`<div class="view">${stratHead('fb')}${scenBar()}
+ <p class="lead" style="margin-top:0">Feedback helps when the learner evaluates it and makes a justified revision.</p>${stepper(FB_STEPS,st,'fbStep')}`;
+ if(st===0){h+=`<h3>Step 1: Draft${t(0)}</h3>
+  ${radios(`fb.${s}.draftMode`,'Draft to improve',[['prepared','Use a prepared example'],['write','Write my own draft']],`data-mode="1" data-target="fb.${s}.draft" data-prep="fbDraft"`)}
+  ${srcBox(`fb.${s}.draftMode`,`fb.${s}.draft`,'fbDraft','','draft','Draft',{cls:'',ph:'e.g., A short plan, paragraph or email of your own (fictional details only).'})}
+  <h4 style="margin-bottom:.2rem">Criteria for feedback</h4><ul>${S.fb.criteria.map(c=>`<li>${esc(c)}</li>`).join('')}</ul>${factCard(s,false)}`;}
+ if(st===1){h+=`<h3>Step 2: Get feedback${t(1)}</h3>
+  <h4 style="margin-bottom:.3rem">Feedback prompt</h4><div class="promptbox" id="fbPrompt">${esc(fbPrompt(s))}</div>
+  ${aiBar('fbPrompt',`fb.${s}.tool`,'Tool used for feedback')}
+  ${radios(`fb.${s}.fbMode`,'Feedback',MODE2,`data-mode="1" data-target="fb.${s}.feedback" data-prep="fbFeedback" data-tool="fb.${s}.tool"`)}
+  ${f.fbMode==='prepared'&&f.draftMode!=='prepared'?`<p class="err">The prepared feedback was written for the prepared draft, not for your own draft. To get feedback on your draft, copy the prompt into an AI tool and paste its feedback.</p>`:''}
+  ${f.fbMode==='prepared'?`<p class="note"><strong>What this AI supposedly received:</strong> the feedback prompt above containing the prepared draft.</p>`:''}
+  ${srcBox(`fb.${s}.fbMode`,`fb.${s}.feedback`,'fbFeedback',`fb.${s}.tool`,'fb','Feedback',{cls:'',ph:'e.g., Paste the feedback from your AI tool here.'})}`;}
+ if(st===2){ensureDec(f);const left=f.sugList.filter(t=>!f.dec.some(d=>d.sug.trim()===t.trim())).length;
+  h+=`<h3>Step 3: Decide</h3><p class="measure">${f.sugList.length?'The feedback has been divided into suggestions below.':'No separate suggestions were found in the feedback, so copy them into the boxes below.'} For each one, choose <strong>Accept</strong>, <strong>Adapt</strong> or <strong>Reject</strong>. A reason is optional but makes your judgement clear. Rejecting a suggestion that does not fit the facts is good judgement.</p>
+  ${f.sugFrom!==f.feedback?'<p class="err">The feedback has changed since it was divided. Press <strong>Divide the feedback again</strong> to update the boxes.</p>':''}
+  <details class="why"><summary>Show the full feedback</summary><div><div class="pre">${esc(f.feedback)||'<em>No feedback yet. Go back to Get feedback.</em>'}</div></div></details>
+  ${f.dec.map((d,i)=>{const pc=S.fb.suggestions.find(x=>x.text.trim()===d.sug.trim());
+   return `<div class="claim"><div class="row" style="justify-content:space-between"><h3 style="margin:0">Suggestion ${i+1}</h3>${i>=3?`<button type="button" class="btn small ghost" data-do="delSug" data-i="${i}">Remove this suggestion</button>`:''}</div>
+   ${ta(`fb.${s}.dec.${i}.sug`,'Suggestion',{cls:'short',hint:'(edit or paste from the feedback)',ph:ph('sug')})}
+   ${radios(`fb.${s}.dec.${i}.decision`,'Decision'+helpBtn('decision'),[['Accept','Accept'],['Adapt','Adapt'],['Reject','Reject']])}
+   ${ta(`fb.${s}.dec.${i}.reason`,'Reason <span class="hint">(optional)</span>',{cls:'short',ph:ph('decReason')})}
+   ${pc?`<div class="checks">${chk(`fb.${s}.dec.${i}.ex`,'Show an example judgement for this suggestion')}</div>${d.ex?`<div class="src judg"><span class="tag">Example learner judgement</span><div><strong>${pc.decision}.</strong> ${esc(pc.reason)}</div></div>`:''}`:''}</div>`;}).join('')}
+  <div class="row"><button type="button" class="btn" data-do="addSug">Add a suggestion</button>${left?`<span class="note">${left} more suggestion${left===1?'':'s'} in the feedback. Press Add a suggestion to include ${left===1?'it':'the next one'}.</span>`:''}</div>
+  <div class="row" style="margin-top:.5rem"><button type="button" class="btn small ghost" data-do="resplitSug">Divide the feedback again</button></div>`;}
+ if(st===3){h+=`<h3>Step 4: Revise${t(3)}</h3><p class="measure">Make the changes you decided on. Your changes are highlighted against the draft.</p>
+  ${radios(`fb.${s}.revMode`,'Revision',[['fromDraft','Start from my draft'],['prepared','Use a prepared example'],['write','Write my own from scratch']],`data-mode="1" data-target="fb.${s}.revision" data-prep="fbRevision"`)}
+  ${f.revMode==='prepared'&&f.draftMode!=='prepared'?'<p class="note">This example revises the prepared draft, not your own.</p>':''}
+  ${srcBox(`fb.${s}.revMode`,`fb.${s}.revision`,'fbRevision','','rev','Revised work',{cls:'tall',ph:'e.g., Your draft with the changes you decided on, such as times added to each item.'})}
+  <h4 style="margin-bottom:.3rem">Your changes</h4><div class="pre diff soft" id="diffView" aria-live="polite">${has(f.revision)?diffHTML(f.draft,f.revision):'<em>No revision yet.</em>'}</div>
+  <p class="note">Green: added. Red with strike-through styling: removed.</p>`;}
+ if(st===4)h+=fbLearn(s)+nextStrat('fb');
+ h+=st<4?navRow('fbStep',st,4,st===3?'See what you learned':'Next step'):navRow('fbStep',st,4);
+ return h+'</div>';
+}
+function fbLearn(s){const f=state.fb[s],S=SCEN[s];const ds=f.dec.filter(d=>has(d.sug)&&d.decision);
+ const words=t=>t.split(/\s+/).filter(Boolean);const changed=has(f.revision)&&f.revision.trim()!==f.draft.trim();
+ return `<div class="learn"><h3>What you learned: ${esc(S.name)}</h3><dl>
+ <dt>AI contribution</dt><dd>Feedback: ${f.fbMode==='prepared'?'prepared illustrative feedback on the prepared draft (written in advance, not generated live)':srcDesc(f.fbMode,f.tool).replace('response','feedback')}.</dd>
+ <dt>Learner contribution</dt><dd>${ds.length?`<ul>${ds.map(d=>`<li><strong>${d.decision}:</strong> ${esc(d.sug.slice(0,100))}${d.sug.length>100?'…':''}</li>`).join('')}</ul>`:nr}
+  <p>${changed?`You revised the work (${words(f.draft).length} words in the draft, ${words(f.revision).length} in the revision)${f.revMode==='prepared'?', using the example revision':''}.`:'Revision: '+nr}</p></dd>
+ <dt>Evidence of learning</dt><dd>${ds.some(d=>has(d.reason))?`<ul>${ds.filter(d=>has(d.reason)).map(d=>`<li>You can justify why you chose to <strong>${d.decision.toLowerCase()}</strong> this suggestion: "${esc(d.reason)}"</li>`).join('')}</ul>`:nr}<p class="note">The decisions and reasons are the evidence; the revision shows they were acted on. Neither proves mastery on its own.</p></dd>
+ <dt>How this could become an assessment requirement</dt><dd>For the ${esc(S.name.toLowerCase())} task, students submit the AI feedback, a decision log with one accept, one adapt or reject, and a reason for each, and the revision with changes visible. In class they explain one rejected suggestion.</dd></dl>${pdfBtn()}</div>`;}
+
+/* ---------- AI as a tutor ---------- */
+/* ---------- AI as a tutor: direct answer versus tutor prompt ---------- */
+const TU_STEPS=['Ask directly','Build a tutor prompt','Learn with hints','Compare and reflect','What you learned'];
+function tutorPrompt(k){const T=TUTOR[k],u=state.tu[k];const adds=TUTOR_ADDS.filter(([a])=>u.adds[a]).map(([,t])=>'- '+t);
+ let p=T.simple;if(adds.length)p+='\n\nHow I want you to help me:\n'+adds.join('\n');if(u.adds.attempt)p+='\n\nMy attempt so far:\n'+(has(u.attempt)?u.attempt.trim():'[write your attempt here]');return p;}
+function tuRebuild(k){const u=state.tu[k];u.prompt=tutorPrompt(k);u.promptEdited=false;}
+function tutorAbout(k){const T=TUTOR[k],S=SCEN[T.scen];
+ return `<div class="soft" aria-live="polite"><p style="margin:0 0 .5rem"><strong>Scenario ${T.scen}: ${esc(S.name)}.</strong> ${esc(T.about)}</p>
+ <p style="margin:0 0 .5rem"><strong>Aim:</strong> ${esc(T.aim)}</p>
+ <p style="margin:0 0 .2rem"><strong>How it works:</strong></p><ol style="margin:.1rem 0 0;padding-left:1.4rem">
+ <li><strong>Ask directly</strong> with a simple prompt and see the full answer AI gives.</li>
+ <li><strong>Build a tutor prompt</strong> by adding instructions that make AI give hints or short explanations instead of the answer.</li>
+ <li><strong>Learn with hints:</strong> reply to the tutor with your own working, two or three times, until you reach the answer yourself.</li>
+ <li><strong>Compare</strong> the two approaches and reflect on what each did for your learning.</li></ol></div>`;}
+function renderTutor(){const k=state.tuSel,T=TUTOR[k],u=state.tu[k],st=u.step;
+ if(!has(u.prompt)){u.prompt=T.simple;u.promptEdited=false;}
+ let h=`<div class="view">${stratHead('tutor')}
+ <p class="lead" style="margin-top:0">Students often use AI as a tutor, for example for maths. Asked directly, AI usually gives the whole answer. Asked well, it can give hints and short explanations, so the student does the thinking. You will try both and compare.</p>
+ <div class="cards">${Object.entries(TUTOR).map(([id,x])=>`<button type="button" class="choice" data-do="pickTask" data-v="${id}" aria-pressed="${k===id}"><strong>${esc(x.title)}</strong>Scenario ${x.scen}: ${esc(SCEN[x.scen].name)}</button>`).join('')}</div>
+ ${tutorAbout(k)}${stepper(TU_STEPS,st,'tuStep')}`;
+ if(st===0){h+=`<h3>Step 1: Ask directly</h3>
+  <p class="measure">Start the way many students do: ask the question and get the answer. The prompt asks for a short answer so it is quick to read.</p>
+  <h4 style="margin-bottom:.3rem">Simple prompt</h4><div class="promptbox" id="tuSimple">${esc(T.simple)}</div>
+  ${aiBar('tuSimple')}
+  ${radios(`tu.${k}.dMode`,'AI response to the simple prompt',MODE2,`data-mode="1" data-target="tu.${k}.direct" data-prep="tuDirect"`)}
+  ${u.dMode==='prepared'?'<p class="note"><strong>What this AI supposedly received:</strong> only the simple prompt above.</p>':''}
+  ${srcBox(`tu.${k}.dMode`,`tu.${k}.direct`,'tuDirect','','ai','Direct answer',{cls:'',ph:'e.g., Paste the full answer from your AI tool here.'})}
+  <p class="note">Notice what you had to do to get this answer: very little. Keep that in mind for the comparison.</p>`;}
+ if(st===1){const changed=has(u.prompt)&&u.prompt.trim()!==T.simple.trim();
+  h+=`<h3>Step 2: Build a tutor prompt</h3>
+  <p class="measure">Your tutor prompt starts from the simple prompt. Tick one or more instructions to add them, and watch the prompt change. You can also edit it directly.</p>
+  <fieldset class="checks"><legend>Add tutor instructions${helpBtn('tadd')}</legend>${TUTOR_ADDS.map(([a,t])=>chk(`tu.${k}.adds.${a}`,t,'tuAdd')).join('')}</fieldset>
+  ${u.adds.attempt?`${ta(`tu.${k}.attempt`,'My attempt so far',{cls:'short',hint:'(added to the prompt)',ph:'e.g., Write what you have tried so far, even if you are unsure.'})}<div class="row"><button type="button" class="btn small ghost" data-do="loadTuAttempt">Load an example attempt</button></div>`:''}
+  ${ta(`tu.${k}.prompt`,'Your tutor prompt',{cls:'tall',hint:'(the simple prompt plus everything you add)',ph:'e.g., the simple prompt, followed by your tutor instructions'})}
+  <details class="why" open><summary>What you added to the simple prompt</summary><div><div class="pre diff soft" id="tuDiff">${changed?diffHTML(T.simple,u.prompt):'<em>Nothing added yet. Tick an instruction above.</em>'}</div></div></details>
+  ${why('Why these instructions work','<p>A simple question invites a complete answer. Telling AI <strong>not</strong> to give the final answer, to give <strong>one hint at a time</strong> and to <strong>wait for your reply</strong> turns it into a tutor. Asking it to <strong>start from your attempt</strong> makes the help fit your thinking, and asking it to <strong>check your understanding</strong> and give a <strong>new problem</strong> shows whether you can do it alone. If hints are not enough, ask for a short explanation of the next step rather than the whole solution.</p>')}`;}
+ if(st===2){
+  h+=`<h3>Step 3: Learn with hints</h3>
+  <p class="measure">Now work through the problem with your tutor. Each round, read the tutor's reply, then write your own reply with your working. Two or three rounds are usually enough.</p>
+  <h4 style="margin-bottom:.3rem">Your tutor prompt</h4><div class="promptbox" id="tuPromptBox">${esc(u.prompt)||'<em>No tutor prompt yet. Go back to Build a tutor prompt.</em>'}</div>
+  ${aiBar('tuPromptBox')}
+  <p class="note">Using your own AI tool: paste the tutor prompt into a new chat, then paste each tutor reply below. Copy your reply back into the same chat to get the next hint.</p>`;
+  for(let r=0;r<u.rounds.length;r++){const R=u.rounds[r];if(r>0&&!u.rounds[r-1].sent)break;const P=T.rounds[r];
+   h+=`<div class="claim"><h3>Round ${r+1}</h3>
+   ${radios(`tu.${k}.rounds.${r}.aMode`,`Tutor reply ${r+1}`,P?MODE2:[['paste','Paste my own AI response']],`data-mode="1" data-target="tu.${k}.rounds.${r}.ai" data-prep="tuRound${r}"`)}
+   ${R.aMode==='prepared'?`<p class="note">Scripted reply, written to follow the example student replies. It does not read what you type. For a reply to your own words, use your own AI tool.</p>`:''}
+   ${R.aMode?srcBoxTu(k,r):''}
+   ${ta(`tu.${k}.rounds.${r}.me`,`Your reply ${r+1}`,{cls:'short',hint:r===u.rounds.length-1?'(optional)':'(your own working, not just the answer)',ph:'e.g., I think the answer is… because…'})}
+   <div class="row">${P?`<button type="button" class="btn small ghost" data-do="loadTuReply" data-r="${r}">Load an example reply</button>`:''}<button type="button" class="btn small ghost" data-do="copy" data-from="${fid(`tu.${k}.rounds.${r}.me`)}">Copy my reply</button>
+   ${!R.sent&&r<u.rounds.length-1?`<button type="button" class="btn small primary" data-do="sendTu" data-r="${r}">Send reply and continue</button>`:''}</div></div>`;}
+  h+=`<div id="tuMsg" role="alert"></div>${u.rounds[u.rounds.length-1].sent||(u.rounds.length>=3&&u.rounds[u.rounds.length-2].sent)?`<div class="row"><button type="button" class="btn small ghost" data-do="addTuRound">Add another round</button><span class="note">Only needed if you are using your own AI tool and want to keep going.</span></div>`:''}`;}
+ if(st===3){const conv=u.rounds.filter(R=>has(R.ai)||has(R.me)).map((R,i)=>`Tutor ${i+1}: ${R.ai.trim()}\n\nMe ${i+1}: ${R.me.trim()||'(no reply)'}`).join('\n\n');
+  h+=`<h3>Step 4: Compare and reflect</h3>
+  <div class="two"><div class="cmpcol"><h3>Direct answer</h3><h4 style="margin:.3rem 0">Prompt</h4><div class="pre" tabindex="0">${esc(T.simple)}</div><h4 style="margin:.6rem 0 .3rem">Response</h4><div class="pre" tabindex="0">${esc(u.direct)||'<em>Not added yet</em>'}</div></div>
+  <div class="cmpcol"><h3>Tutor conversation</h3><h4 style="margin:.3rem 0">Prompt</h4><div class="pre" tabindex="0">${esc(u.prompt)||'<em>Not written yet</em>'}</div><h4 style="margin:.6rem 0 .3rem">Conversation</h4><div class="pre" tabindex="0">${esc(conv)||'<em>No rounds yet</em>'}</div></div></div>
+  <p class="measure" style="margin-top:1rem">Compare the two approaches. There is no right answer: each has a place.</p>
+  ${TU_CMP.map(([c,l])=>`<div class="claim">${radios(`tu.${k}.cmp.${c}.r`,l+helpBtn('tcmp'),[['Direct answer','Direct answer'],['Tutor','Tutor'],['About the same','About the same'],['Not sure','Not sure']])}${inp(`tu.${k}.cmp.${c}.why`,'Why?',{ph:'e.g., With the tutor I had to find the mistake in my own working.'})}</div>`).join('')}
+  ${ta(`tu.${k}.reflection`,'When would you ask AI for a direct answer, and when would you ask it to tutor you? What did the tutor approach make you do?',{ph:'e.g., I would use a direct answer to check my work, and the tutor when I am learning a new method, because…'})}
+  <div class="checks">${chk(`tu.${k}.reflEx`,'Load an example reflection','tuReflEx')}</div>
+  ${u.reflEx?`<div class="src judg"><span class="tag">Example learner reflection</span><div>${esc(T.reflectionEx)}</div></div>`:''}`;}
+ if(st===4)h+=tuLearn(k)+nextStrat('tutor');
+ h+=st<4?navRow('tuStep',st,4,st===3?'See what you learned':'Next step'):navRow('tuStep',st,4);
+ return h+'</div>';}
+function srcBoxTu(k,r){return srcBox(`tu.${k}.rounds.${r}.aMode`,`tu.${k}.rounds.${r}.ai`,`tuRound${r}`,'','ai',`Tutor reply ${r+1}`,{cls:'short',ph:'e.g., Paste the tutor\'s reply from your AI tool here.'});}
+function tuLearn(k){const T=TUTOR[k],u=state.tu[k];const adds=TUTOR_ADDS.filter(([a])=>u.adds[a]).map(([,t])=>t);const mine=u.rounds.filter(R=>has(R.me));const own=mine.filter((R,i)=>!T.rounds[i]||R.me!==T.rounds[i].me).length;
+ const cmp=TU_CMP.filter(([c])=>u.cmp[c].r).map(([c,l])=>`${l} ${u.cmp[c].r}${has(u.cmp[c].why)?' ('+u.cmp[c].why.trim()+')':''}`);
+ return `<div class="learn"><h3>What you learned: ${esc(T.title)}</h3><dl>
+ <dt>AI contribution</dt><dd>A direct answer (${u.dMode==='prepared'?'prepared, not generated live':u.dMode==='paste'?'pasted from your AI tool':'not recorded'}) and ${u.rounds.filter(R=>has(R.ai)).length} tutor replies (${u.rounds.some(R=>R.aMode==='paste')?'including replies pasted from your AI tool':'prepared and scripted'}).</dd>
+ <dt>Learner contribution</dt><dd><ul><li>${adds.length?`Your tutor prompt added: ${esc(adds.join(' '))}`:'Tutor instructions: '+nr}</li>
+ <li>${mine.length?`You wrote ${mine.length} replies with your working${own<mine.length?` (${mine.length-own} loaded from the examples)`:''}.`:'Replies: '+nr}</li>
+ <li>${cmp.length?'Your comparison: '+esc(cmp.join('; '))+'.':'Comparison: '+nr}</li></ul></dd>
+ <dt>Evidence of learning</dt><dd>${mine.length?`<p><strong>Your final reply:</strong> "${esc(mine[mine.length-1].me)}"</p>`:''}${has(u.reflection)?`<p><strong>Your reflection:</strong> ${esc(u.reflection)}</p>`:''}${!mine.length&&!has(u.reflection)?nr:''}
+ <p class="note">Your replies show your own reasoning step by step. They do not prove mastery on their own; solving a new problem without AI would.</p></dd>
+ <dt>How this could become an assessment requirement</dt><dd>Students submit the direct answer, their tutor prompt, the full tutor conversation showing their own replies, and a short reflection comparing the two. In class they solve a similar problem without AI.</dd></dl>${pdfBtn()}</div>`;}
+
+/* ---------- Design an assessment ---------- */
+function frame(){const a=state.as;const b=v=>has(v)?esc(v):'______';return `In my subject, students could use AI to ${b(a.s1)}. They would check ${b(a.s2)} using ${b(a.s3)}. I would know they had learned because they could ${b(a.s4)}.`;}
+function briefText(){const a=state.as;const L=[['Task',a.task],['Required AI contribution',a.ai],["Student's verification",a.verify],['Submission evidence',a.evidence],['Individual explanation or demonstration',a.demo]];return 'Assessment brief\n\n'+L.map(([l,v])=>`${l}: ${has(v)?v.trim():'[to complete]'}`).join('\n\n');}
+function renderAssess(){const a=state.as;
+ return `<div class="view">${stratHead('assess')}<p class="lead" style="margin-top:0">Turn one strategy into a task for your own subject.</p>
+ <div class="soft"><p style="margin:0 0 .5rem"><strong>What this strategy is.</strong> When students can use AI, an assessment that only collects the final product mostly measures the AI. This strategy redesigns the task so that students use AI openly, check what it produced, and then show their own understanding. The AI's output becomes material for the assessment, not the answer to it.</p>
+ <p style="margin:0 0 .5rem"><strong>Aim:</strong> design a short assessment in which the evidence of learning is the student's judgement and explanation, using one of the strategies you have just practised.</p>
+ <p style="margin:0 0 .2rem"><strong>Your task:</strong></p><ol style="margin:.1rem 0 .5rem;padding-left:1.4rem"><li><strong>Choose a starting point:</strong> one of the sector examples below, or Custom for your own subject.</li><li><strong>Complete the sentence</strong> about what students use AI for, what they check, what they check it against, and how you would know they learned.</li><li><strong>Assemble a brief</strong> with five parts: the task, the AI contribution, the student's verification, the submission evidence and an individual explanation or demonstration.</li><li><strong>Try the illustrative example</strong> on judging a model's claimed usefulness.</li></ol>
+ <p style="margin:0"><strong>What to expect:</strong> about 5 to 10 minutes, and a brief you can copy into your own unit materials. A good brief makes the AI's role explicit, requires evidence for every judgement, and includes something the student does without AI, such as a short conversation or an in-class problem.</p></div>
+ <fieldset><legend>Start from an example (optional)</legend><div class="radios">${Object.entries(ASSESS_EX).map(([k,x])=>`<label for="asx_${k}"><input type="radio" id="asx_${k}" name="asx" value="${k}" data-asex="1" ${a.ex===k?'checked':''}>${x.label}</label>`).join('')}<label for="asx_custom"><input type="radio" id="asx_custom" name="asx" value="custom" data-asex="1" ${a.ex==='custom'?'checked':''}>Custom</label></div></fieldset>
+ ${a.ex?assessSector(a.ex):''}
+ <div class="panel"><h3 style="margin-top:0">Complete the sentence</h3>
+ ${inp('as.s1','In my subject, students could use AI to …',{ph:'e.g., draft feedback on an essay plan'})}${inp('as.s2','They would check …',{ph:'e.g., whether each suggestion matches the marking criteria'})}${inp('as.s3','using …',{ph:'e.g., the assignment rubric'})}${inp('as.s4','I would know they had learned because they could …',{ph:'e.g., explain why they rejected one suggestion and show the change'})}
+ <p class="promptbox" id="frameOut" style="margin-top:1rem">${frame()}</p></div>
+ <div class="panel"><h3 style="margin-top:0">Assemble a short brief</h3>
+ ${ta('as.task','The task',{cls:'short',ph:'e.g., Use AI to get feedback on a draft paragraph against the rubric.'})}${ta('as.ai','The required AI contribution',{cls:'short',ph:'e.g., Up to four suggestions, each linked to a rubric criterion.'})}${ta('as.verify',"The student's verification",{cls:'short',ph:'e.g., Accept, adapt or reject each suggestion with a reason citing the rubric.'})}${ta('as.evidence','Submission evidence',{cls:'short',ph:'e.g., The draft, the AI feedback, the decision log and the revised paragraph.'})}${ta('as.demo','Individual explanation or demonstration',{cls:'short',ph:'e.g., A two-minute in-class explanation of one rejected suggestion.'})}
+ <h4 style="margin-bottom:.3rem">Your brief</h4><div class="promptbox" id="briefOut">${esc(briefText())}</div>
+ <div class="row" style="margin-top:.5rem"><button type="button" class="btn" data-do="copy" data-from="briefOut">Copy brief</button></div></div>
+ <div class="panel"><h3 style="margin-top:0">Illustrative example: is this model useful?</h3>
+ <p class="note"><strong>Fictional teaching data.</strong></p>
+ <p class="promptbox">A model predicts every order will arrive on time. Of 100 orders, eight arrive late. The model therefore achieves 92% accuracy but identifies none of the late deliveries.</p>
+ ${ta('as.dataAns','A student claims this model is useful for detecting late deliveries. What evidence would you expect them to use when evaluating that claim?',{ph:'e.g., I would expect them to check how many of the late orders the model actually found…'})}
+ <div class="row"><button type="button" class="btn small" data-do="showData" id="dataBtn" ${has(a.dataAns)?'':'disabled'}>Show an example answer</button></div>
+ ${a.showData?`<div class="src judg"><span class="tag">Example answer</span>
+ <div class="tblwrap"><table class="judge" style="max-width:32rem;margin:.4rem 0"><caption class="note" style="text-align:left">Counts implied by the description (fictional)</caption><thead><tr><th scope="col"></th><th scope="col">Predicted late</th><th scope="col">Predicted on time</th></tr></thead><tbody><tr><th scope="row">Actually late</th><td>0</td><td>8</td></tr><tr><th scope="row">Actually on time</th><td>0</td><td>92</td></tr></tbody></table></div>
+ <ul><li>Late deliveries found: 0 of 8, so the model detects none of the cases it is meant to detect.</li><li>Accuracy is (0 + 92) ÷ 100 = 92%, exactly what "always predict on time" scores. Accuracy alone hides this when late orders are rare.</li><li>A useful detector would need to find a reasonable share of late orders; the student should report that share (here 0%) and compare with a simple baseline.</li><li>They should also ask what a missed late delivery costs, and whether the result holds on more than 100 orders.</li></ul>
+ <p>Conclusion: the evidence does not support the claim that this model is useful for detecting late deliveries.</p></div>`:''}</div>
+ ${renderTp()}
+ ${nextStrat('assess')}${why('Why this matters','<p class="measure">An assessment that asks for the AI output alone rewards whoever has the best tool. Asking for verification evidence and an individual explanation makes the learner\'s judgement visible and gives you something to assess.</p>')}</div>`;}
+
+/* ---------- Takeaways ---------- */
+function notesText(){const L=[];const line=(t='')=>L.push(t);const pre=(l,v)=>{if(has(v)){line(l+':');line(v.trim());line();}};
+ line('WORKING BETTER WITH AI: MY NOTES');line('Saved from the workshop page. Prepared examples are labelled as such.');line();
+ SL.forEach(s=>{const e=state.ev[s],S=SCEN[s];const any=has(e.initResp)||e.units.some(c=>c.sel)||has(e.prompt)||has(e.reflection);
+  if(!any)return;line(`== Evaluate and improve: ${S.name} ==`);
+  line(`Initial response: ${srcDesc(e.initMode,e.tool).replace(/<[^>]+>/g,'')}`);
+  e.units.filter(c=>c.sel).forEach((c,i)=>{line(`Sentence ${i+1}${c.type?' ('+c.type+')':''}: ${c.text.trim()}`);line(`  Verdict: ${c.verdict||'none'}. Reason: ${c.reason.trim()||'none'}`);});
+  pre('What the response left out',e.omission);pre('Improved prompt',e.prompt);
+  line(`Revised response: ${srcDesc(e.revMode,e.revTool).replace(/<[^>]+>/g,'')}`);
+  CRIT.forEach(([k,l])=>{if(e.cmp[k].r)line(`${l}: ${e.cmp[k].r}${has(e.cmp[k].why)?' ('+e.cmp[k].why.trim()+')':''}`);});
+  pre('Were the problems fixed?',e.fixed);pre('Reflection',e.reflection);line();});
+ SL.forEach(s=>{const f=state.fb[s],S=SCEN[s];if(!has(f.draft)&&!has(f.revision))return;line(`== Feedback and revision: ${S.name} ==`);
+  line(`Draft: ${f.draftMode==='prepared'?'prepared example':'my own'}. Feedback: ${f.fbMode==='prepared'?'prepared illustrative feedback':srcDesc(f.fbMode,f.tool)}.`);
+  f.dec.filter(d=>has(d.sug)).forEach((d,i)=>line(`Suggestion ${i+1}: ${d.sug.trim()}\n  Decision: ${d.decision||'none'}. Reason: ${d.reason.trim()||'none'}`));
+  pre(`Revision${f.revMode==='prepared'?' (example revised work)':''}`,f.revision);line();});
+ Object.entries(TUTOR).forEach(([k,T])=>{const u=state.tu[k];if(!has(u.direct)&&!u.rounds.some(R=>has(R.me)))return;line(`== AI as a tutor: ${T.title} ==`);pre('Direct answer',u.direct);pre('My tutor prompt',u.prompt);u.rounds.forEach((R,i)=>{if(has(R.ai))pre(`Tutor ${i+1}`,R.ai);if(has(R.me))pre(`Me ${i+1}`,R.me);});TU_CMP.forEach(([c,l])=>{if(u.cmp[c].r)line(`${l} ${u.cmp[c].r}${has(u.cmp[c].why)?' ('+u.cmp[c].why.trim()+')':''}`);});pre('Reflection',u.reflection);line();});
+ const a=state.as;if(has(a.s1)||has(a.task)||has(a.dataAns)){line('== Assessment design ==');line(frame());line();line(briefText());line();pre('Evidence for the late-delivery model (fictional data)',a.dataAns);}
+ if(a.tp&&a.tp.d)Object.entries(a.tp.d).forEach(([k,d])=>{if(!has(d.A)&&!d.b.some(x=>has(x.text))&&!has(d.refl))return;const X=TP_SECTORS[k];line(`== Assessment practice: ${X.label} ==`);line('Topic: '+d.topic);pre('Submission A (no strategy)',d.A);d.b.forEach((x,i)=>pre(`Submission B, ${TP_PARTS[X.strat][i]}`,x.text));TP_RUB.forEach(([c,l])=>{if(d.ev[c].A||d.ev[c].B)line(`${l}: A ${d.ev[c].A||'-'}, B ${d.ev[c].B||'-'}`);});pre('My conclusion from A',d.comA);pre('My conclusion from B',d.comB);pre('Reflection',d.refl);});
+ const t=state.tk;if(has(t.one)||has(t.two)||has(t.three)){line('== Takeaways ==');pre('One idea I will try',t.one);pre('One risk I will watch for',t.two);pre('One question I still have',t.three);}
+ return L.join('\n');}
+function renderTake(){
+ return `<div class="view"><button type="button" class="btn small ghost back" data-do="tab" data-t="home">Back to all strategies</button><h2 tabindex="-1" id="pageH">My takeaways</h2>
+ <p class="q">What can AI contribute, and what thinking must the learner still do?</p>
+ <div class="panel">${ta('tk.one','One idea I will try',{cls:'short',ph:'e.g., Ask students to give evidence for every verdict on an AI answer.'})}${ta('tk.two','One risk I will watch for',{cls:'short',ph:'e.g., Students accepting fluent AI text without checking it.'})}${ta('tk.three','One question I still have',{cls:'short',ph:'e.g., How do I assess the reflection fairly?'})}</div>
+ <div class="row"><button type="button" class="btn primary" data-do="pdfNotes">Download my notes as a PDF</button><button type="button" class="btn" data-do="download">Download my notes (.txt)</button><button type="button" class="btn" data-do="print">Print</button><button type="button" class="btn warn" data-do="reset">Reset everything</button></div>
+ <div class="soft"><div class="checks"><label for="saveChk"><input type="checkbox" id="saveChk" ${state.save?'checked':''}><span><strong>Save my work in this browser.</strong> Your entries are kept on this device, in this browser only, so they survive a refresh. Nothing is sent anywhere. Untick to stop saving and remove the saved copy. Avoid this on a shared computer.</span></label></div>${storageOK?'':'<p class="err">This browser is blocking local storage, so saving is unavailable. Download your notes instead.</p>'}</div>
+ <h3>Summary</h3><div class="summary"><div class="pre soft" id="sumText">${esc(notesText())}</div></div>
+ <p class="note">Use fictional or approved information only. This page does not collect names, send entries or upload files.</p></div>`;}
+
+/* In-page confirmation dialog (browser pop-ups can be blocked when the page is embedded) */
+function askConfirm(msg){return new Promise(res=>{const back=document.activeElement;
+ const o=document.createElement('div');o.className='modalbg';o.innerHTML=`<div class="modal" role="alertdialog" aria-modal="true" aria-labelledby="mdlMsg"><p id="mdlMsg">${esc(msg)}</p><div class="row" style="justify-content:flex-end"><button type="button" class="btn ghost" data-r="0">Cancel</button><button type="button" class="btn primary" data-r="1">Yes, continue</button></div></div>`;
+ const done=v=>{o.remove();document.removeEventListener('keydown',key,true);if(back&&back.focus)back.focus({preventScroll:true});res(v);};
+ const key=e=>{if(e.key==='Escape'){e.preventDefault();done(false);}if(e.key==='Tab'){const bs=o.querySelectorAll('button');if(e.shiftKey&&document.activeElement===bs[0]){e.preventDefault();bs[1].focus();}else if(!e.shiftKey&&document.activeElement===bs[1]){e.preventDefault();bs[0].focus();}}};
+ o.addEventListener('click',e=>{const b=e.target.closest('[data-r]');if(b)done(b.dataset.r==='1');});
+ document.addEventListener('keydown',key,true);document.body.appendChild(o);o.querySelector('[data-r="1"]').focus();});}
+/* Help (?) buttons: plain explanations with examples from the current scenario */
+const HELP_TITLE={type:'Help: what kind of statement is it?',verdict:'Help: choosing a verdict',decision:'Help: accept, adapt or reject',c_acc:'Help: accuracy against the facts',c_feas:'Help: feasibility',c_rel:'Help: relevance',c_unc:'Help: handling of uncertainty',c_use:'Help: usefulness',fixed:'Help: were the problems fixed?',tadd:'Help: tutor instructions',tcmp:'Help: comparing the two approaches',trub:'Help: evaluation criteria'};
+const CRIT_HELP={
+ acc:{t:'Accuracy against the facts',q:'Does the response match the fact card?',d:'Check the details the response states, such as numbers, totals, times, days and rules, against the fact card. A response can sound confident and still get a fact wrong.',look:'Totals, durations, limits and anything that conflicts with a rule on the fact card.',A:{b:'The revised costs add up to $120 and the agenda to 60 minutes; the initial plan was $140 and about 90 minutes.',w:'The revised plan gets the budget right but now gives the wrong number of volunteers.'},B:{b:'The revised plan has 30-minute weekday sessions only; the initial plan had 45-minute sessions and Saturday reviews.',w:'The revised plan removes weekends but now lists a topic that is not on the test.'}},
+ feas:{t:'Feasibility',q:'Could it actually be done with what is available?',d:'Think about time, money, people, space and resources. A plan can be accurate and still impossible to carry out in practice.',look:'Whether each activity fits the time, the volunteers or learner can do it, and nothing needs resources that are not available.',A:{b:'Two volunteers can run every part, nothing needs cooking, and every activity can be done seated.',w:'The revised plan needs a projector and a third helper that the event does not have.'},B:{b:'Every session fits in 30 minutes and uses free resources only.',w:'The revised plan squeezes three topics and a test into one 30-minute session.'}},
+ rel:{t:'Relevance',q:'Does it address this situation, this audience and the task?',d:'A relevant response is tailored to the scenario. Generic advice that could apply to anyone, or material that answers a different question, is less relevant.',look:'Whether it speaks to the people involved and the goal, and leaves out padding.',A:{b:'The activities are designed for adults who have just met and have different confidence speaking in groups.',w:'The revised plan adds a long section on marketing the event, which was not asked for.'},B:{b:'It covers exactly the three test topics and starts with the fractions the learner finds hard.',w:'It adds advanced topics such as regression that are not on the test.'}},
+ unc:{t:'Handling of uncertainty',q:'Does it say what it does not know, instead of guessing?',d:'Good responses state their assumptions, flag missing information and suggest how to find it out. Weak responses fill gaps with invented details.',look:'Lists of assumptions or unresolved needs, questions back to you, and no made-up facts.',A:{b:'It lists food preferences and language needs as unresolved and says to ask on the registration form.',w:'It now states that "most guests are vegetarian", which nobody has confirmed.'},B:{b:'It asks about the test format and sets no score targets without a baseline.',w:'It assumes the test is multiple choice without being told.'}},
+ use:{t:'Usefulness',q:'Could the person act on it straight away?',d:'A useful response is clear, specific and organised, so someone could follow it without rewriting it. Length is not usefulness: a short, clear plan can beat a long one.',look:'Concrete steps, times, roles or amounts, and a layout that is easy to follow.',A:{b:'A timed agenda with volunteer roles and an itemised budget that an organiser could use tomorrow.',w:'The revised plan is accurate but is a long paragraph with no times or roles.'},B:{b:'A day-by-day weekday plan the learner could start on Monday.',w:'It explains study theory at length but never says what to do each day.'}}
+};
+function critHelp(k){const eg=t=>`<div class="eg">${t}</div>`;
+ if(k==='fixed')return `<h3>Were the problems you found fixed?</h3><p>Go back to each sentence you marked <span class="pill Unsupported">Unsupported</span> or <span class="pill Uncertain">Uncertain</span> and find what the revised response now says about it.</p><dl>
+ <dt>Fixed</dt><dd>The problem is gone and the new version fits the facts.${eg(state.scen==='A'?'<strong>Example:</strong> "Programme (about 90 minutes)" was unsupported. Fixed: the revised agenda adds up to exactly 60 minutes.':'<strong>Example:</strong> "Saturday: one-hour review" was unsupported. Fixed: the revised plan has no weekend study.')}</dd>
+ <dt>Partly fixed</dt><dd>It is better but not fully right, or one part is still a problem.${eg('<strong>Example:</strong> The cost total is now within budget, but one item still has no price.')}</dd>
+ <dt>Not fixed</dt><dd>The revised response repeats the problem or ignores it.</dd>
+ <dt>Handled</dt><dd>For an uncertain sentence: the revised response no longer assumes it and says what needs to be found out.</dd></dl>
+ <p>Point to the line in the revised response that shows your answer. Also note anything <strong>new</strong> that went wrong, and what still needs checking. The <strong>Prepare a draft</strong> button gives you a starting point to edit.</p>`;
+ const c=CRIT_HELP[k.slice(2)],x=c[state.scen]||c.A;
+ return `<h3>${c.t}</h3><p><strong>${c.q}</strong> ${c.d}</p><p><strong>What to look for:</strong> ${c.look}</p>
+ <dl><dt>Better</dt><dd>The revised response does this clearly better than the initial one.${eg('<strong>Example:</strong> '+x.b)}</dd>
+ <dt>Similar</dt><dd>No real difference between the two on this point.</dd>
+ <dt>Worse</dt><dd>The revised response is weaker here, for example a new error crept in.${eg('<strong>Example:</strong> '+x.w)}</dd>
+ <dt>Not sure</dt><dd>You cannot tell yet, for example because you would need information you do not have. This is a fair answer.</dd></dl>
+ <p class="note">In the Why? box, point to the difference you saw, for example a number, a time or a line from the fact card.</p>`;}
+function helpBtn(k){return `<button type="button" class="qbtn" data-do="help" data-h="${k}" aria-label="${HELP_TITLE[k]}" title="What does this mean?">?</button>`;}
+function helpHTML(k){const A=state.scen==='A';const eg=t=>`<div class="eg"><strong>Example:</strong> ${t}</div>`;
+ if(k==='type')return `<h3>What kind of statement is it?</h3><p>This sorts the sentence so you know how to check it. If you are unsure, pick the closer one: the verdict and your reason matter more than the label.</p><dl>
+ <dt>Factual claim</dt><dd>The sentence states something that can be checked as <strong>true or false</strong>, using facts or numbers. Calling it a factual claim does not mean it is correct. Ask: <em>is this true or false here?</em>${eg(A?'"Total estimated cost: $140." You can add up the items and compare the total with the budget.':'"By the end of week 2 you should be able to score 80% on a practice test." It is presented as a fact about what will happen.')}</dd>
+ <dt>Recommendation</dt><dd>The sentence suggests <strong>an action</strong>, something to do. Ask: <em>does this fit our situation?</em> A recommendation can be a good idea in general and still be wrong for this case.${eg(A?'"Seat people in small groups of four or five with conversation prompt cards."':'"Add a one-hour review every Saturday." Reasonable in general, but this learner does no weekend study.')}</dd></dl>`;
+ if(k==='verdict')return `<h3>Choosing a verdict</h3><p>Compare the sentence with the <strong>fact card</strong> and the <strong>success criteria</strong>. Then give a short reason that points to your evidence. You do not have to find an error: a well-justified Supported is just as valuable.</p><dl>
+ <dt><span class="pill Supported">Supported</span></dt><dd>It fits the facts and criteria, and you can point to the evidence.${eg(A?'"Small groups of four or five" is supported: the fact card says there are 20 adults with different confidence levels, which makes four groups of five.':'"Begin each session with 5 minutes reviewing errors" is supported: it fits a 30-minute session and is active practice.')}</dd>
+ <dt><span class="pill Uncertain">Uncertain</span></dt><dd>You cannot decide yet because the information you need is not on the fact card. It might be fine, but something must be found out first.${eg(A?'"Serve morning tea with vegetarian and gluten-free options" is uncertain: food preferences have not been confirmed.':'"Score 80% by week 2" is uncertain: we do not know the learner\'s starting level or the test format.')}</dd>
+ <dt><span class="pill Unsupported">Unsupported</span></dt><dd>It conflicts with the facts, or nothing justifies it.${eg(A?'"Total estimated cost: $140" is unsupported: the budget is $120.':'"Add a one-hour review every Saturday" is unsupported: the fact card says no weekend study.')}</dd></dl>
+ <p class="note">A good reason names the evidence, for example: "The fact card gives a $120 budget, but these items add up to $140."</p>`;
+ if(k==='trub')return `<h3>Evaluation criteria</h3><p>Rate each submission as <strong>Not evident</strong>, <strong>Partly</strong> or <strong>Clearly</strong>. Judge only what the submission shows; do not assume.</p><dl>
+ <dt>Quality of the final product</dt><dd>Is the final answer, survey, paragraph or summary correct and fit for purpose?</dd>
+ <dt>Evidence of the student's own judgement</dt><dd>Can you see decisions the student made, rather than output they accepted?</dd>
+ <dt>Use of evidence to support decisions</dt><dd>Do their judgements point to the reading, the fact sheet, the rubric or the data?</dd>
+ <dt>Transparency about how AI was used</dt><dd>Can you tell what the AI produced and what the student changed?</dd>
+ <dt>Confidence that you know what the student understands</dt><dd>After reading it, how sure are you about what this student can do on their own?</dd></dl><div class="eg"><strong>Example:</strong> a polished Submission A can be <em>Clearly</em> on quality but <em>Not evident</em> on judgement, because nothing shows how it was produced.</div>`;
+ if(k==='tadd'||k==='tcmp')return tuHelp(k);
+ if(k.startsWith('c_')||k==='fixed')return critHelp(k);
+ return `<h3>Accept, adapt or reject</h3><p>Feedback is a set of suggestions, not instructions. Decide what to do with each one, and give a reason based on the criteria or the fact card.</p><dl>
+ <dt>Accept</dt><dd>Use the suggestion as it is, because it improves the work against the criteria.${eg(A?'"Add a time to each item": accept, because the draft does not show it fits 60 minutes.':'"Add a fractions refresher in week 1": accept, because the learner struggles with fractions.')}</dd>
+ <dt>Adapt</dt><dd>The idea is useful, but it needs changing to fit the situation.${eg(A?'"Ask every person to present to the whole group": adapt, so each table chooses a reader or displays its poster, because confidence varies.':'"Take a full practice test every Friday": adapt to a short five-question check, because sessions are 30 minutes.')}</dd>
+ <dt>Reject</dt><dd>Do not use it, because it conflicts with the facts or does not help.${eg(A?'"Hire a local musician": reject, because paid entertainment would strain the $120 budget.':'"Add a weekend catch-up session": reject, because the fact card says no weekend study.')}</dd></dl>
+ <p class="note">Rejecting a suggestion with a good reason shows judgement. It is not a failure.</p>`;}
+function showHelp(k){const back=document.activeElement;const o=document.createElement('div');o.className='modalbg';
+ o.innerHTML=`<div class="modal help" role="dialog" aria-modal="true" aria-label="${HELP_TITLE[k]}">${helpHTML(k)}<div class="row" style="justify-content:flex-end;margin-top:1rem"><button type="button" class="btn primary" data-close="1">Close</button></div></div>`;
+ const close=()=>{o.remove();document.removeEventListener('keydown',key,true);if(back&&back.focus)back.focus({preventScroll:true});};
+ const key=e=>{if(e.key==='Escape'){e.preventDefault();close();}if(e.key==='Tab'){e.preventDefault();o.querySelector('[data-close]').focus();}};
+ o.addEventListener('click',e=>{if(e.target===o||e.target.closest('[data-close]'))close();});
+ document.addEventListener('keydown',key,true);document.body.appendChild(o);const md=o.querySelector('.modal');md.setAttribute('tabindex','-1');md.focus({preventScroll:true});md.scrollTop=0;}
+/* Briefly highlight boxes that a button has just changed */
+function flash(keys){keys.forEach(k=>{const el=document.getElementById(fid(k));if(!el)return;el.classList.remove('flash');void el.offsetWidth;el.classList.add('flash');setTimeout(()=>el.classList.remove('flash'),1800);});}
+for(let i=0;i<10;i++)PREP['tuRound'+i]=()=>((TUTOR[state.tuSel].rounds[i]||{}).ai||'');
+PREP.tuDirect=()=>TUTOR[state.tuSel].direct;
+function tuGate(s,st){const k=state.tuSel,u=state.tu[k],T=TUTOR[k];
+ if(st===0&&!has(u.direct))return 'Add the AI response to the simple prompt first: use the prepared example or paste your own.';
+ if(st===1&&(!has(u.prompt)||u.prompt.trim()===T.simple.trim()))return 'Add at least one tutor instruction to the prompt: tick a box above.';
+ if(st===2&&!(has(u.rounds[0].ai)&&has(u.rounds[0].me)))return 'Complete at least round 1: the tutor reply and your own reply.';
+ return '';}
+function tuDiffUpd(k){const d=document.getElementById('tuDiff');if(!d)return;const u=state.tu[k],T=TUTOR[k];d.innerHTML=has(u.prompt)&&u.prompt.trim()!==T.simple.trim()?diffHTML(T.simple,u.prompt):'<em>Nothing added yet. Tick an instruction above.</em>';}
+function tuHelp(k){const eg=t=>`<div class="eg">${t}</div>`;
+ if(k==='tadd')return `<h3>Tutor instructions</h3><p>A simple question invites a complete answer. Each instruction changes how AI responds, so that you do more of the thinking. Tick one or more.</p><dl>
+ <dt>Do not give me the final answer</dt><dd>The most important one: without it, most AI tools solve the problem for you.</dd>
+ <dt>One hint at a time, then wait</dt><dd>Stops AI from giving every hint at once, which is the same as giving the answer.</dd>
+ <dt>Start from my attempt</dt><dd>The help fits your thinking, and AI points to your actual mistake.${eg('<strong>Example:</strong> if you wrote "600 minutes is 6 hours", the tutor can ask how many minutes are in an hour.')}</dd>
+ <dt>Explain only the next step if I am stuck</dt><dd>When hints are not enough, a short explanation keeps you moving without giving away the whole solution.</dd>
+ <dt>Ask me to explain my method</dt><dd>Explaining in your own words shows whether you understand it, not just whether you got the number.</dd>
+ <dt>Give me a similar problem</dt><dd>Checks that you can do it on your own, without the tutor.</dd>
+ <dt>Keep each reply short</dt><dd>Short replies are easier to act on and leave the work to you.</dd></dl>`;
+ return `<h3>Comparing the two approaches</h3><p>For each question, choose which approach did it better: the <strong>Direct answer</strong> from the simple prompt, or the <strong>Tutor</strong> conversation. <strong>About the same</strong> and <strong>Not sure</strong> are fair answers.</p><dl>
+ <dt>Doing the thinking</dt><dd>Who worked out each step: you or the AI?</dd>
+ <dt>Understanding the method</dt><dd>Could you now explain how to solve it, not just state the answer?</dd>
+ <dt>Correct answer</dt><dd>Did each approach reach the right result? Both can.</dd>
+ <dt>Speed</dt><dd>The direct answer is usually faster. That is a real advantage when you only need to check a result.</dd>
+ <dt>A similar problem on your own</dt><dd>Which would leave you better prepared to solve the next one without AI?</dd></dl>
+ ${eg('<strong>Example:</strong> "Tutor: the hint made me find my own mistake in turning minutes into hours, so I would not make it again."')}`;}
+/* Sector-specific explanation for strategy 4 */
+const SECTOR_ABOUT={
+ education:{who:'Teacher education, or any course where students learn to explain ideas to others.',strategy:'Evaluate and improve (strategy 1): students check AI-written practice questions and worked answers.',why:'AI produces plausible practice questions quickly, but worked answers can contain errors or pitch the level wrongly. Finding and fixing them shows subject knowledge and an understanding of how learners think.',look:'Every worked answer has a verdict with a reference to the set reading, and the student can explain why one question could mislead a learner.'},
+ business:{who:'Business, management or marketing courses that use cases and data collection.',strategy:'Feedback and revision (strategy 2): students accept, adapt or reject AI-drafted survey questions.',why:'AI can draft a customer survey in seconds, but questions often ask for data the business cannot collect or would not use. Deciding what to keep tests understanding of evidence and the business context.',look:'Each question has a decision linked to the fact sheet or budget, and the student can say what evidence a rejected question would have needed.'},
+ writing:{who:'Any subject with written assessment: essays, reports, reflections or literature reviews.',strategy:'Feedback and revision (strategy 2): students judge AI feedback on a draft against the rubric.',why:'AI feedback is fast and fluent, but not every suggestion fits the rubric or the purpose of the piece. Accepting, adapting and rejecting with reasons shows the student understands the standard they are writing to.',look:'A decision log citing rubric criteria, a revision with visible changes, and the student applying one accepted suggestion to new writing in class.'},
+ data:{who:'Data science, statistics, research methods or any course that reports results.',strategy:'Evaluate and improve (strategy 1): students check claims in an AI-written summary of results.',why:'AI summaries often lead with headline figures such as accuracy and miss what matters, such as a model that never finds the rare cases. Checking each claim against the numbers is a core professional skill.',look:'Every claim in the summary has a verdict with recomputed figures, and the student can explain without notes why accuracy alone can mislead.'},
+ custom:{who:'Your own subject.',strategy:'Pick the strategy that fits: Evaluate and improve to check AI output, Feedback and revision to judge AI feedback, or AI as a tutor to learn a method with hints.',why:'Start from a task you already set. Ask where students are likely to use AI anyway, and make that use visible and checkable.',look:'The AI contribution is stated, every judgement needs evidence from your unit materials, and there is one moment where the student shows understanding without AI.'}
+};
+function assessSector(k){const x=SECTOR_ABOUT[k];if(!x)return '';const name=k==='custom'?'Custom':ASSESS_EX[k].label;
+ return `<div class="soft" aria-live="polite" style="border-left:5px solid var(--orange)"><p style="margin:0 0 .4rem"><strong>${esc(name)}: how this example works</strong></p>
+ <p style="margin:0 0 .4rem"><strong>Suits:</strong> ${esc(x.who)}</p>
+ <p style="margin:0 0 .4rem"><strong>Strategy used:</strong> ${esc(x.strategy)}</p>
+ <p style="margin:0 0 .4rem"><strong>Why it works:</strong> ${esc(x.why)}</p>
+ <p style="margin:0"><strong>What good evidence looks like:</strong> ${esc(x.look)}</p>${k!=='custom'?'<p class="note" style="margin:.5rem 0 0">The sentence and brief below have been filled with this example. Edit them to fit your own unit.</p>':''}</div>`;}
+/* ---------- Strategy 4 practice: assess the same task without and with the AI strategy ---------- */
+const TP_SECTORS={
+ education:{label:'Education',strat:1,topic:'Calculating the mean (average) for adult learners returning to study',
+  taskA:'Write three practice questions with worked answers on {topic}. Submit the questions and answers.',
+  taskB:'Use AI to draft three practice questions with worked answers on {topic}. Then submit:\n1. Your prompt and the AI\'s draft.\n2. A check of each worked answer: Supported, Uncertain or Unsupported, with evidence from the set reading.\n3. Your corrected final set of questions.\n4. A short reflection (about 80 words) on what you changed and why.\n5. In class: explain one correction in two minutes, without notes.',
+  A:`Q1. Find the mean of 4, 7 and 10.
+Worked answer: 4 + 7 + 10 = 21, and 21 ÷ 3 = 7. The mean is 7.
+
+Q2. A learner scores 12, 15, 9 and 14 on four quizzes. What is the mean score?
+Worked answer: 12 + 15 + 9 + 14 = 50, and 50 ÷ 4 = 12.5. The mean score is 12.5.
+
+Q3. The mean of five numbers is 6. Four of the numbers are 4, 5, 7 and 8. Find the fifth number.
+Worked answer: 4 + 5 + 7 + 8 = 24, and 24 ÷ 4 = 6, so the fifth number is 6.`,
+  B:[`Prompt: Write three practice questions with worked answers on calculating the mean, for adult learners returning to study. Include one question where a value is missing.
+
+AI draft:
+Q1. Find the mean of 4, 7 and 10. Worked answer: 4 + 7 + 10 = 21, and 21 ÷ 3 = 7.
+Q2. Quiz scores of 12, 15, 9 and 14. Worked answer: 12 + 15 + 9 + 14 = 50, and 50 ÷ 4 = 12.5.
+Q3. The mean of five numbers is 6. Four of them are 4, 5, 7 and 8. Find the fifth. Worked answer: 4 + 5 + 7 + 8 = 24, and 24 ÷ 4 = 6, so the fifth number is 6.`,
+`Q1 worked answer: Supported. The sum is 21 and there are 3 values, so 21 ÷ 3 = 7. This matches the definition in the reading: sum ÷ number of values.
+Q2 worked answer: Supported. I re-added the scores (50) and divided by 4 to get 12.5.
+Q2 level: Uncertain. The answer is a decimal. The reading says some learners find fractions and decimals hard, so this may need a hint.
+Q3 worked answer: Unsupported. The answer 6 is right only by coincidence: averaging the four known numbers is the wrong method. The correct method is total = 5 × 6 = 30, then 30 − 24 = 6. With 2, 5, 7 and 8 the AI's method gives 5.5, but the correct answer is 8.`,
+`Q1. Find the mean of 4, 7 and 10.
+Worked answer: 4 + 7 + 10 = 21, and 21 ÷ 3 = 7.
+
+Q2. Quiz scores of 12, 15, 9 and 14. Find the mean.
+Worked answer: 12 + 15 + 9 + 14 = 50, and 50 ÷ 4 = 12.5. Hint: 50 ÷ 4 is 12 with 2 left over, and 2 out of 4 is a half.
+
+Q3. The mean of five numbers is 6. Four of them are 2, 5, 7 and 8. Find the fifth.
+Worked answer: all five numbers add to 5 × 6 = 30. The four known numbers add to 22. The fifth number is 30 − 22 = 8.`,
+`The AI's third question got the right number by accident: it averaged the four known numbers. I only noticed because I checked the method, not just the answer. I changed the numbers so the wrong method gives a different answer, which makes the question a fairer test, and I added a hint for the decimal in Q2. Next time I would ask the AI to name the formula it uses in each step.`,
+`If the mean of five numbers is 6, all five must add up to 30. Take away the four numbers you know, which add to 22, and the missing number is 8. Averaging the four known numbers gives 5.5, which is not the missing number at all.`],
+  evalA:'The questions look correct and well set out, but I cannot tell whether the student wrote or checked them. Q3 uses a wrong method that happens to give the right answer, and nothing shows the student noticed. I can grade the product but not the learning.',
+  evalB:'The final set is correct, and the student found the flawed method in Q3, explained why it is wrong and changed the numbers so the question now tests the right idea. Each verdict points to the reading. I can see what they understand, and the in-class explanation confirms it.'},
+ business:{label:'Business',strat:2,topic:'A short customer survey for a café trial to reduce unsold sandwiches',
+  taskA:'Write a five-question customer survey for {topic}. Submit the survey.',
+  taskB:'Write your own five-question draft for {topic}. Ask AI for feedback using the café fact sheet (short survey, no personal data, the owner tallies results by hand). Then submit:\n1. Your draft and the AI\'s feedback.\n2. A decision log: accept, adapt or reject each suggestion, with a reason.\n3. Your revised survey.\n4. A short reflection (about 80 words).\n5. In class: explain one rejected suggestion in two minutes.',
+  A:`Café customer survey
+1. How satisfied are you with our sandwiches? (1 to 5)
+2. What is your annual household income?
+3. Which new sandwich fillings would you like us to add?
+4. At what time do you usually buy lunch here?
+5. Would you pay more for premium organic ingredients?`,
+  B:[`My draft:
+1. How often do you buy a sandwich here?
+2. What time do you usually buy it?
+3. Has your preferred sandwich ever sold out before you arrived?
+4. Which sandwich do you usually buy?
+5. Any other comments?
+
+AI feedback:
+1. Add answer options to Q1 and Q2, such as time bands, so responses are quick to tally.
+2. Ask for age and income so you can segment customers.
+3. Q3 is the most useful question: add "If yes, what did you buy instead?"
+4. Replace Q5 with a question about which new fillings customers would like.`,
+`1. Answer options for Q1 and Q2: Accept. The owner tallies by hand, so fixed options are faster.
+2. Age and income: Reject. The fact sheet says no personal data, and they are not needed for this trial.
+3. Follow-up to Q3: Adapt. Useful, but I made it tick boxes (bought something else / left without buying) to keep the survey quick.
+4. New fillings question: Reject. The trial is about reducing unsold sandwiches; more fillings could increase waste.`,
+`1. How often do you buy a sandwich here? (Daily / 2 to 3 times a week / Weekly / Less often)
+2. When do you usually buy it? (Before 11 am / 11 am to 1 pm / After 1 pm)
+3. Has your preferred sandwich ever sold out before you arrived? (Yes / No)
+   If yes, what did you do? (Bought something else / Left without buying)
+4. Which sandwich do you usually buy? (tick list)
+5. Any other comments? (optional)`,
+`I accepted the time bands because the owner needs answers that are quick to tally. I rejected age and income: they are personal, not needed and would make the survey longer. The AI's idea about sold-out sandwiches was the most useful, but I simplified it to tick boxes. The feedback was fluent, but two of the four suggestions did not fit the café's goal.`,
+`I rejected the new-fillings question because the trial aims to reduce waste. Asking customers for more fillings would push the owner to make more types of sandwich, which could increase the number left unsold.`],
+  evalA:'A tidy survey, but it asks for household income, which is personal and unnecessary, and two questions do not serve the trial. There is no sign of the student\'s reasoning or how the questions were produced.',
+  evalB:'The decision log shows clear reasons: the student rejected the income question because of the fact sheet and adapted the sold-out question to suit a busy counter. The revised survey fits the trial, and I can see their judgement at every step.'},
+ writing:{label:'Writing',strat:2,topic:'Should the campus library stay open until midnight during exam weeks?',
+  taskA:'Write a persuasive paragraph of about 120 words on: {topic} Submit the paragraph.',
+  taskB:'Write your own draft paragraph (about 120 words) on: {topic} Ask AI for feedback against the rubric: a clear claim, relevant evidence, a counter-argument and a conclusion. Then submit:\n1. Your draft and the AI\'s feedback.\n2. A decision log: accept, adapt or reject each suggestion, with a reason.\n3. Your revised paragraph.\n4. A short reflection (about 80 words).\n5. In class: revise a new sentence using one accepted suggestion.',
+  A:`The campus library should stay open until midnight during exam weeks. Studies show that 78% of students study best late at night, and extended hours would reduce stress across the university. A quiet, well-lit space gives students who share crowded homes a place to focus, and longer hours spread demand so the library is less crowded at peak times. While some may worry about staffing costs, the benefits for student success clearly outweigh them. Extending opening hours is a simple, low-cost way to show that the university supports its students when it matters most.`,
+  B:[`My draft:
+I think the library should stay open until midnight in exam weeks. Many students work or care for family during the day, so evenings are the only time they can study. At home it can be noisy. The library has computers and quiet rooms. Some people say it costs too much. But it is only for a few weeks a year.
+
+AI feedback:
+1. Open with a clearer claim: remove "I think" and state your position directly.
+2. Strengthen your evidence with a statistic, such as "78% of students study best at night".
+3. Develop the counter-argument: explain the staffing cost and how it could be reduced.
+4. Add a concluding sentence that returns to your claim.`,
+`1. Clearer claim: Accept. The rubric asks for a clear claim, and "I think" weakens it.
+2. Add a statistic: Reject. The AI gave no source for 78%, so I cannot use it. I would use a source from the reading or local data such as library entry counts.
+3. Counter-argument: Adapt. I acknowledged the cost and proposed a trial, without inventing figures.
+4. Concluding sentence: Accept. The rubric asks for a conclusion and my draft stopped abruptly.`,
+`The campus library should stay open until midnight during exam weeks. Many students work or care for family during the day, so the evening is their only real study time, and home can be noisy. The library offers quiet rooms and computers that some students do not have elsewhere. Extra hours cost money for staff, but the university could trial late opening for exam weeks only, with fewer services after 10 pm, and use entry counts to see whether students come. A short trial would show whether late opening is worth keeping, and it would support students when they need it most.`,
+`The most important decision was rejecting the 78% statistic. It sounded convincing, but there was no source, and using it would have been dishonest. Developing the counter-argument made my paragraph stronger than simply dismissing the cost. My paragraph is less polished than an AI version, but every claim in it is one I can defend.`,
+`Original sentence: "Libraries are good for students." Revised using the clear-claim suggestion: "Late opening in exam weeks gives students without a quiet home a place to study."`],
+  evalA:'Fluent and persuasive, but it relies on a statistic with no source and contradicts itself by calling the change low-cost while admitting staffing costs. I cannot tell how much of the writing or judgement is the student\'s own.',
+  evalB:'The student\'s draft, the AI feedback and their decisions are all visible. They rejected the invented statistic, developed the counter-argument into a realistic trial, and the revision meets the rubric. The prose is less polished than A, but the reasoning is clearly theirs.'},
+ data:{label:'Data analysis',strat:1,topic:'A model that predicts late deliveries (fictional data: 100 orders, 8 late; the model predicts every order on time)',
+  taskA:'Write a short summary (about 80 words) for a manager of the performance of {topic}. Submit the summary.',
+  taskB:'Ask AI to summarise for a manager the performance of {topic}. Then submit:\n1. Your prompt and the AI\'s summary.\n2. A check of each claim in the summary, with recomputed figures.\n3. Your corrected summary.\n4. A short reflection (about 80 words).\n5. In class: explain without notes why accuracy alone can mislead.',
+  A:`The model performs very well, with an accuracy of 92%. It correctly classified 92 of 100 orders and produced no false alarms, so staff would never be sent to chase an order that was actually on time. With such high accuracy, the model is ready to be used to flag late deliveries. Further gains could come from adding more data.`,
+  B:[`Prompt: Summarise this model's performance for a manager in about 80 words. Results: 100 orders, 8 actually late. The model predicted all 100 orders as on time.
+
+AI summary:
+The model performs very well, with an accuracy of 92%. It correctly classified 92 of 100 orders and produced no false alarms, so staff would never be sent to chase an order that was actually on time. With such high accuracy, the model is ready to be used to flag late deliveries.`,
+`"Accuracy of 92%": Supported. (0 + 92) ÷ 100 = 92%.
+"No false alarms": Supported, but misleading. No on-time order was flagged as late, because nothing was flagged at all.
+"Performs very well": Unsupported. It found 0 of the 8 late orders (0%).
+"Ready to be used to flag late deliveries": Unsupported. It flags nothing. A rule that always says "on time" also scores 92%.`,
+`The model labels every order as on time. It is 92% accurate only because 92 of the 100 orders were on time; it found none of the 8 late orders. A rule that always says "on time" would score the same. The model is not yet useful for flagging late deliveries. It should be retrained and judged on how many late orders it finds, not on accuracy alone.`,
+`The AI summary sounded confident, and every number in it was technically correct, which is what made it misleading. Checking each claim against the table showed that the model never finds a late order. I now look at the cases that matter, not just the headline accuracy, before I believe a summary.`,
+`Accuracy counts all the correct predictions. When late orders are rare, saying "on time" for every order is right 92% of the time, but it finds no late orders. To judge the model you need to look at how many late orders it actually caught.`],
+  evalA:'It reads professionally but recommends using a model that finds none of the late orders. There is no sign the student checked the claims against the results, so I cannot credit understanding.',
+  evalB:'Each claim was checked against the results: the student recomputed 92%, showed that 0 of 8 late orders were found, and the corrected summary says the model is not ready. Strong evidence of understanding, confirmed by the explanation.'}
+};
+const TP_PARTS={1:['Prompt and AI draft','Check of each claim (verdicts with evidence)','Improved final product','Reflection','Individual explanation (in class)'],2:['Own draft and AI feedback','Decision log (accept, adapt or reject)','Revised final product','Reflection','Individual explanation (in class)']};
+const TP_RUB=[['product','Quality of the final product'],['judge','Evidence of the student\'s own judgement'],['evid','Use of evidence to support decisions'],['ai','Transparency about how AI was used'],['know','Confidence that you know what the student understands']];
+const TP_STEPS=['Topic','Two versions of the task','Submission A: no strategy','Submission B: with the strategy','Evaluate','Reflect','What you learned'];
+const TP_REFL='Without the strategy I could only mark the final product, and a polished answer could hide a flawed method, invented evidence or a misleading conclusion. With AI built into the task, I could see the student\'s checks, decisions and reasons, so I knew what they understood, and the short in-class explanation confirmed it. It takes longer to mark, so I would use a short verdict table and a brief reflection. Before using it, I would make sure students have a reading or fact sheet to check against.';
+function tpS(){const t=state.as.tp;if(!t.d[t.sec])t.d[t.sec]={topic:TP_SECTORS[t.sec].topic,aMode:'',A:'',b:[0,1,2,3,4].map(()=>({mode:'',text:''})),ev:{},comA:'',comB:'',exEval:false,refl:'',reflEx:false,done:false};const d=t.d[t.sec];TP_RUB.forEach(([c])=>{if(!d.ev[c])d.ev[c]={A:'',B:''};});return d;}
+const tpTask=(x,d)=>{let t=has(d.topic)?d.topic.trim():'[your topic]';const i=x.indexOf('{topic}');if(x[i-2]!==':'&&/^[A-Z][a-z]/.test(t))t=t[0].toLowerCase()+t.slice(1);return x.replace('{topic}',t);};
+PREP.tpA=()=>TP_SECTORS[state.as.tp.sec].A;
+for(let i=0;i<5;i++)PREP['tpB'+i]=()=>TP_SECTORS[state.as.tp.sec].B[i];
+const TP_MODE=[['prepared','Use the example student response'],['write','Write or paste my own']];
+function renderTp(){const t=state.as.tp,X=TP_SECTORS[t.sec],d=tpS(),st=t.step,P='as.tp.d.'+t.sec;const changed=d.topic.trim()!==X.topic;
+ if(!d.taskBEdited||!has(d.taskB))d.taskB=tpTask(X.taskB,d);
+ let h=`<div class="panel" id="tpPanel" style="border:2px solid var(--orange)"><h2 id="tpH" tabindex="-1" style="margin-top:0">Practise this strategy</h2>
+ <p class="measure">In this practice you act as the <strong>teacher</strong>. The same student completes a task twice: first with no guidance on AI use (<strong>Submission A</strong>), then with the AI strategy built into the task (<strong>Submission B</strong>). You then evaluate both and reflect on what each tells you about learning.</p>
+ ${stepper(TP_STEPS,st,'tpStep')}`;
+ if(st===0){h+=`<h3>Step 1: Choose a topic</h3>
+  <fieldset><legend>Sector</legend><div class="radios">${Object.entries(TP_SECTORS).map(([k,x])=>`<label for="tps_${k}"><input type="radio" id="tps_${k}" name="tps" value="${k}" data-k="as.tp.sec" ${t.sec===k?'checked':''}>${x.label}</label>`).join('')}</div></fieldset>
+  ${ta(P+'.topic','Topic',{cls:'short',hint:'(edit it to suit your own unit)',ph:'e.g., '+X.topic})}
+  <p class="note">This sector practises strategy ${X.strat}: ${X.strat===1?'Evaluate and improve (Ask → Analyse → Verify → Improve → Reflect)':'Feedback and revision (Feedback → Decide → Revise)'}.${changed?' You changed the topic: the example student responses were written for the original topic, so use them as a model or write your own.':''}</p>`;}
+ if(st===1){h+=`<h3>Step 2: Two versions of the task</h3><p class="measure">Read both versions. Version A is how many tasks are set today. Version B builds the AI strategy into the task and asks for several outputs.</p>
+  <div class="two"><div class="cmpcol"><h3>Version A: no strategy</h3><div class="pre">${esc(tpTask(X.taskA,d))}</div><p class="note">Students may or may not use AI. Only the final product is submitted.</p></div>
+  <div class="cmpcol"><h3>Version B: with the strategy</h3>${ta(P+'.taskB','Task wording',{cls:'tall',hint:'(editable: adapt the prompt and the outputs to your unit)',ph:'e.g., Use AI to draft… Then submit: 1. Your prompt and the AI\'s draft. 2. …'})}<div class="row" style="margin-top:.4rem"><button type="button" class="btn small ghost" data-do="tpResetB">Restore the original wording</button></div><p class="note">AI use is expected and visible. Students submit their checks and decisions, and explain one in class.</p></div></div>
+  <p class="note">Want to try the task yourself as a student? Copy version B into an AI tool.</p>${aiBar(fid(P+'.taskB'))}`;}
+ if(st===2){h+=`<h3>Step 3: Submission A, no strategy</h3><p class="measure">This is what the student submits for version A: the final product only.</p>
+  <div class="promptbox">${esc(tpTask(X.taskA,d))}</div>
+  ${radios(P+'.aMode','Submission A',TP_MODE,`data-mode="1" data-target="${P}.A" data-prep="tpA"`)}
+  ${srcBox(P+'.aMode',P+'.A','tpA','','stu','Student submission A',{cls:'tall',ph:'e.g., Paste or write a student response to version A.'})}`;}
+ if(st===3){const parts=TP_PARTS[X.strat];h+=`<h3>Step 4: Submission B, with the strategy</h3><p class="measure">The same student now follows the strategy. Each part below is one of the outputs version B asks for, with an example student response.</p>
+  <div class="promptbox">${esc(d.taskB)}</div>
+  ${parts.map((lab,i)=>`<div class="claim"><h3>Part ${i+1}: ${lab}</h3>${radios(`${P}.b.${i}.mode`,'Response',TP_MODE,`data-mode="1" data-target="${P}.b.${i}.text" data-prep="tpB${i}"`)}${srcBox(`${P}.b.${i}.mode`,`${P}.b.${i}.text`,'tpB'+i,'','stu',lab,{cls:i===4?'short':'tall',ph:'e.g., Paste or write the student\'s '+lab.toLowerCase()+'.'})}</div>`).join('')}
+  <div class="row"><button type="button" class="btn small" data-do="tpLoadAll">Use all the example responses</button></div>`;}
+ if(st===4){const sub=d.b.map((x,i)=>has(x.text)?`${TP_PARTS[X.strat][i]}:\n${x.text.trim()}`:'').filter(Boolean).join('\n\n');
+  h+=`<h3>Step 5: Evaluate both submissions</h3><p class="measure">Mark each submission as the teacher. Rate each criterion, then say what you can conclude about the student's learning.</p>
+  <div class="two"><div class="cmpcol"><h3>Submission A</h3><div class="pre" tabindex="0">${esc(d.A)||'<em>Not added yet</em>'}</div></div><div class="cmpcol"><h3>Submission B</h3><div class="pre" tabindex="0">${esc(sub)||'<em>Not added yet</em>'}</div></div></div>
+  ${TP_RUB.map(([c,l])=>`<div class="claim"><h3 style="margin-top:0;font-size:1.05rem">${l}${helpBtn('trub')}</h3><div class="two"><div>${radios(`${P}.ev.${c}.A`,'Submission A',[['Not evident','Not evident'],['Partly','Partly'],['Clearly','Clearly']])}</div><div>${radios(`${P}.ev.${c}.B`,'Submission B',[['Not evident','Not evident'],['Partly','Partly'],['Clearly','Clearly']])}</div></div></div>`).join('')}
+  ${ta(P+'.comA','What can you conclude about the student\'s learning from Submission A?',{cls:'short',ph:'e.g., The product looks correct, but I cannot tell whether the student checked it.'})}
+  ${ta(P+'.comB','What can you conclude from Submission B?',{cls:'short',ph:'e.g., The student found the flawed method and explained the correction.'})}
+  <div class="checks">${chk(P+'.exEval','Show an example teacher evaluation')}</div>
+  ${d.exEval?`<div class="src judg"><span class="tag">Example teacher evaluation</span><p style="margin:.3rem 0"><strong>Submission A:</strong> ${esc(X.evalA)}</p><p style="margin:0"><strong>Submission B:</strong> ${esc(X.evalB)}</p></div>`:''}`;}
+ if(st===5){h+=`<h3>Step 6: Reflect</h3>
+  ${ta(P+'.refl','Compare assessing without and with AI integration. What could you see about learning in each? What did version B ask of students, and of you as the marker? What would you change before using it in your unit?',{ph:'e.g., In A I could only mark the product; in B I could see the student\'s decisions, but it took longer to mark, so I would…'})}
+  <div class="checks">${chk(P+'.reflEx','Load an example reflection','tpReflEx')}</div>
+  ${d.reflEx?`<div class="src judg"><span class="tag">Example teacher reflection</span><div>${esc(TP_REFL)}</div></div>`:''}`;}
+ if(st===6)h+=tpLearn();
+ h+=st<6?navRow('tpStep',st,6,st===5?'See what you learned':'Next step'):navRow('tpStep',st,6);
+ return h+'</div>';}
+function tpLearn(){const t=state.as.tp,X=TP_SECTORS[t.sec],d=tpS();const rated=TP_RUB.filter(([c])=>d.ev[c].A||d.ev[c].B);const nB=d.b.filter(x=>has(x.text)).length;
+ return `<div class="learn"><h3>What you learned: ${esc(X.label)}</h3><dl>
+ <dt>AI contribution</dt><dd>In version B, AI ${X.strat===1?'drafted the work that the student then checked':'gave feedback that the student then judged'}. In version A, any AI use was invisible.</dd>
+ <dt>Your contribution as the teacher</dt><dd><ul><li>Topic: ${esc(d.topic)}</li><li>Submission B had ${nB} of 5 parts.</li><li>${rated.length?'Your ratings: '+rated.map(([c,l])=>`${esc(l)}: A ${d.ev[c].A||'not rated'}, B ${d.ev[c].B||'not rated'}`).join('; ')+'.':'Ratings: '+nr}</li></ul></dd>
+ <dt>Evidence of learning</dt><dd>${has(d.comA)?`<p><strong>From A:</strong> ${esc(d.comA)}</p>`:''}${has(d.comB)?`<p><strong>From B:</strong> ${esc(d.comB)}</p>`:''}${has(d.refl)?`<p><strong>Your reflection:</strong> ${esc(d.refl)}</p>`:''}${!has(d.comA)&&!has(d.comB)&&!has(d.refl)?nr:''}</dd>
+ <dt>Next step</dt><dd>Use the brief above to write version B for a task in your own unit, and decide which part you will check in class.</dd></dl>${pdfBtn()}</div>`;}
+function tpGate(s,st){const d=tpS();if(st===0&&!has(d.topic))return 'Enter a topic first.';return '';}
+
+/* ---------- Files: PDF summaries and downloads ---------- */
+function pdfBtn(){return `<div class="row" style="margin-top:1rem"><button type="button" class="btn primary" data-do="pdfLearn">Download a PDF of this summary</button><span class="note">Includes your reflection. Keep it for your notes or portfolio.</span></div>`;}
+/* Save a file: through the claude.ai viewer when published, otherwise as a normal browser download */
+async function saveFile(filename,data,mime){let dl=null;try{if(window.claude&&typeof window.claude.use==='function')dl=await window.claude.use('downloads');}catch(e){dl=null;}
+ if(dl){try{await dl.save({filename,data});toast('Saved '+filename+'.');}catch(e){toast(e&&e.code==='declined'?'Download cancelled.':'The file could not be saved here. Try Print instead.');}return;}
+ const blob=data instanceof Blob?data:new Blob([data],{type:mime||'application/octet-stream'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=filename;document.body.appendChild(a);a.click();setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove();},800);toast('Downloaded '+filename+'.');}
+/* jsPDF's built-in fonts cover Latin-1 only, so swap other characters for plain ones */
+const pdfSafe=t=>String(t||'').replace(/[\u2018\u2019]/g,"'").replace(/[\u201C\u201D]/g,'"').replace(/[\u2013\u2014\u2212]/g,'-').replace(/\u2192/g,'->').replace(/\u2026/g,'...').replace(/\u2022/g,'-').replace(/[^\x09\x0A\x0D\x20-\x7E\u00A0-\u00FF]/g,'');
+function buildPdf(title,sections,who){const J=window.jspdf&&window.jspdf.jsPDF;if(!J)return null;const doc=new J({unit:'mm',format:'a4'});const W=210,M=18,TW=W-2*M;let y;
+ const need=h=>{if(y+h>282){doc.addPage();y=20;}};
+ doc.setFillColor(11,58,111);doc.rect(0,0,W,14,'F');doc.setTextColor(255,255,255);doc.setFont('helvetica','bold');doc.setFontSize(9.5);doc.text('Working Better with AI  |  VU Digital Community of Practice, 20 November 2026',M,9);
+ y=27;doc.setTextColor(11,58,111);doc.setFontSize(17);doc.splitTextToSize(pdfSafe(title),TW).forEach(l=>{need(8);doc.text(l,M,y);y+=7.5;});
+ doc.setFont('helvetica','normal');doc.setFontSize(9);doc.setTextColor(95,105,115);doc.text(pdfSafe('Generated '+new Date().toLocaleDateString('en-AU',{day:'numeric',month:'long',year:'numeric'})+'. Prepared examples are labelled in the app; this summary records your choices, not a mark.'),M,y);y+=6;
+ const whoLine=who?[who.name,who.aff,who.email].filter(has).map(x=>x.trim()).join('  |  '):'';
+ if(whoLine){doc.setFont('helvetica','bold');doc.setFontSize(10.5);doc.setTextColor(30,38,51);doc.splitTextToSize(pdfSafe('Prepared by: '+whoLine),TW).forEach(l=>{doc.text(l,M,y);y+=5.2;});doc.setFont('helvetica','normal');}
+ y+=3;
+ doc.setDrawColor(201,214,229);doc.line(M,y-4,W-M,y-4);
+ sections.forEach(([h,b])=>{need(14);doc.setFont('helvetica','bold');doc.setFontSize(12);doc.setTextColor(11,58,111);doc.splitTextToSize(pdfSafe(h),TW).forEach(l=>{need(6);doc.text(l,M,y);y+=6;});
+  doc.setFont('helvetica','normal');doc.setFontSize(10.5);doc.setTextColor(30,38,51);
+  pdfSafe(b).trim().split('\n').forEach(par=>{if(!par.trim()){y+=2;return;}doc.splitTextToSize(par.trim(),TW).forEach(l=>{need(5.2);doc.text(l,M,y);y+=5.2;});});y+=5;});
+ const n=doc.getNumberOfPages();for(let i=1;i<=n;i++){doc.setPage(i);doc.setFontSize(8);doc.setTextColor(120,120,120);doc.text('Page '+i+' of '+n,W-M,291,{align:'right'});}
+ return doc.output('blob');}
+/* Optional details for the PDF. Kept in memory for this visit only: never saved or sent anywhere */
+let pdfWho={name:'',aff:'',email:''};
+function askDetails(){return new Promise(res=>{const back=document.activeElement;const o=document.createElement('div');o.className='modalbg';
+ o.innerHTML=`<div class="modal" role="dialog" aria-modal="true" aria-labelledby="pdfWhoH"><h3 id="pdfWhoH" style="margin-top:0">Add your details to the PDF?</h3><p class="note">All optional. Leave any box empty. Your details are only printed on this PDF; they are not saved or sent anywhere.</p>
+ <label class="lbl" for="pwName">Name</label><input type="text" id="pwName" autocomplete="name" placeholder="e.g., Alex Nguyen" value="${esc(pdfWho.name)}">
+ <label class="lbl" for="pwAff">Affiliation</label><input type="text" id="pwAff" autocomplete="organization" placeholder="e.g., Victoria University, College of Arts, Business, Law, Education and IT" value="${esc(pdfWho.aff)}">
+ <label class="lbl" for="pwEmail">Email</label><input type="text" id="pwEmail" autocomplete="email" inputmode="email" placeholder="e.g., alex.nguyen@vu.edu.au" value="${esc(pdfWho.email)}">
+ <div class="row" style="justify-content:flex-end;margin-top:1rem"><button type="button" class="btn ghost" data-r="cancel">Cancel</button><button type="button" class="btn" data-r="skip">Skip and download</button><button type="button" class="btn primary" data-r="add">Add and download</button></div></div>`;
+ const done=v=>{o.remove();document.removeEventListener('keydown',key,true);if(back&&back.focus)back.focus({preventScroll:true});res(v);};
+ const key=e=>{if(e.key==='Escape'){e.preventDefault();done(null);}if(e.key==='Enter'&&e.target.tagName==='INPUT'){e.preventDefault();o.querySelector('[data-r="add"]').click();}if(e.key==='Tab'){const f=[...o.querySelectorAll('input,button')];const i=f.indexOf(document.activeElement);if(e.shiftKey&&i===0){e.preventDefault();f[f.length-1].focus();}else if(!e.shiftKey&&i===f.length-1){e.preventDefault();f[0].focus();}}};
+ o.addEventListener('click',e=>{const b=e.target.closest('[data-r]');if(!b)return;const r=b.dataset.r;if(r==='cancel')return done(null);if(r==='skip')return done({name:'',aff:'',email:''});pdfWho={name:$('#pwName').value,aff:$('#pwAff').value,email:$('#pwEmail').value};done(pdfWho);});
+ document.addEventListener('keydown',key,true);document.body.appendChild(o);$('#pwName').focus();});}
+async function deliverPdf(title,secs){const who=await askDetails();if(!who){toast('PDF cancelled.');return;}const blob=buildPdf(title,secs,who);const name='working-better-with-ai-'+title.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'').slice(0,60)+'.pdf';
+ if(blob){await saveFile(name,blob,'application/pdf');return;}
+ $('#printArea').innerHTML=`<h1>${esc(title)}</h1>`+([who.name,who.aff,who.email].some(has)?`<p><strong>Prepared by:</strong> ${esc([who.name,who.aff,who.email].filter(has).join(' | '))}</p>`:'')+secs.map(([h,b])=>`<h2>${esc(h)}</h2><div class="pre">${esc(b)}</div>`).join('');toast('The PDF tool is not available offline. Choose Save as PDF in the print window.');setTimeout(()=>window.print(),300);}
+/* ---------- Render ---------- */
+const VIEWS={home:renderStart,eval:renderEval,fb:renderFb,tutor:renderTutor,assess:renderAssess,take:renderTake};
+function render(focusHead){const act=document.activeElement&&document.activeElement.id;
+ if(!VIEWS[state.tab])state.tab='home';$('#main').innerHTML=VIEWS[state.tab]();
+ autoGrow();if(focusHead){const v=$('#main .view');if(v)v.classList.add('fade');const h=$('#pageH');if(h)h.focus({preventScroll:true});window.scrollTo({top:0});}
+ else if(act){const el=document.getElementById(act);if(el)el.focus({preventScroll:true});}}
+function autoGrow(el){(el?[el]:document.querySelectorAll('#main textarea')).forEach(t=>{t.style.height='auto';if(t.tagName!=='TEXTAREA')return;t.style.height=(t.scrollHeight+3)+'px';});}
+function gateMsg(m){const g=$('#gateMsg');if(g){g.innerHTML=m?`<p class="err">${esc(m)}</p>`:'';}}
+
+/* ---------- Step navigation with gentle checks ---------- */
+function evGate(s,st){const e=state.ev[s];
+ if(st===0&&!has(e.initResp))return 'Add an initial AI response first: use the prepared example, paste one, or write one.';
+ if(st===1){ensureUnits(e);if(e.unitsFrom!==e.initResp&&has(e.initResp))return 'The response has changed. Divide it again before continuing.';if(!e.units.some(u=>u.sel))return 'Tick at least one sentence to check. You can choose as many as you like.';}
+ if(st===2){const i=e.units.findIndex(u=>u.sel&&!(has(u.text)&&u.verdict));if(i>=0)return `Sentence ${i+1} needs a verdict.`;}
+ if(st===3){if(!has(e.prompt)||e.prompt.trim()===SCEN[s].initialPrompt.trim())return 'Add at least one improvement to the prompt: tick a box above or fill in a field.';if(!has(e.revResp))return 'Add a revised AI response so you can compare.';}
+ return '';}
+function fbGate(s,st){const f=state.fb[s];
+ if(st===0&&!has(f.draft))return 'Add a draft first: use the prepared example or write your own.';
+ if(st===1&&!has(f.feedback))return 'Add feedback first: use the prepared example, paste feedback or write your own.';
+ if(st===2){ensureDec(f);const i=f.dec.findIndex(d=>has(d.sug)&&!d.decision);if(i>=0)return `Suggestion ${i+1} needs a decision: Accept, Adapt or Reject.`;if(!f.dec.some(d=>has(d.sug)&&d.decision))return 'Make a decision on at least one suggestion.';}
+ if(st===3){if(!has(f.revision))return 'Write your revision first.';if(f.revision.trim()===f.draft.trim())return 'Your revision is identical to the draft. Make the changes you decided on.';}
+ return '';}
+function go(kind,n){const s=state.scen,o=kind==='ev'?state.ev[s]:kind==='tu'?state.tu[state.tuSel]:kind==='tp'?state.as.tp:state.fb[s],gate=kind==='ev'?evGate:kind==='tu'?tuGate:kind==='tp'?tpGate:fbGate,last=kind==='ev'?5:kind==='tp'?6:4;
+ if(n>o.step){for(let i=o.step;i<n;i++){const m=gate(s,i);if(m){if(o.step!==i){o.step=i;render(true);}gateMsg(m);const g=$('#gateMsg');if(g)g.scrollIntoView({block:'center'});return;}}}
+ o.step=n;if(n===last)o.done=true;save();render(true);}
+
+/* ---------- Copy ---------- */
+async function copyText(t){try{await navigator.clipboard.writeText(t);toast('Copied. Paste it into your AI tool.');}catch(e){const x=document.createElement('textarea');x.value=t;x.setAttribute('readonly','');x.style.position='fixed';x.style.opacity='0';document.body.appendChild(x);x.select();let ok=false;try{ok=document.execCommand('copy');}catch(_){}x.remove();toast(ok?'Copied. Paste it into your AI tool.':'Copy was blocked. Select the text and copy it manually.');}}
+
+/* ---------- Change handlers ---------- */
+function onMode(el){const mk=el.dataset.k,tk=el.dataset.target,prep=PREP[el.dataset.prep](state.scen),toolK=el.dataset.tool,cur=get(tk)||'',prev=get(mk);
+ if(!state.stash)state.stash={};
+ /* keep the participant's own text so that switching options never loses it */
+ if(prev!=='prepared'&&has(cur)&&cur!==prep)state.stash[tk]=cur;
+ if(el.value==='prepared'){set(tk,prep);if(toolK)set(toolK,'Prepared example');}
+ else if(el.value==='fromDraft'){set(tk,state.fb[state.scen].draft);}
+ else{set(tk,(prev==='prepared'||prev==='fromDraft')?(state.stash[tk]||''):cur);if(toolK&&get(toolK)==='Prepared example')set(toolK,'');}
+ set(mk,el.value);save();render();
+ if(el.value==='prepared'&&state.stash[tk])toast('Your own text is kept. Switch back to get it again.');
+ else if(prev==='prepared'&&state.stash[tk])toast('Your earlier text has been restored.');}
+/* The improved prompt starts from the initial prompt; ticked boxes and filled fields are added below it */
+function fullPrompt(s){const add=assemble(state.ev[s].b);return SCEN[s].initialPrompt+(has(add)?'\n\nUse the following details:\n\n'+add:'');}
+function updPromptDiff(s){const d=document.getElementById('promptDiff');if(!d)return;const e=state.ev[s],ip=SCEN[s].initialPrompt;d.innerHTML=has(e.prompt)&&e.prompt.trim()!==ip.trim()?diffHTML(ip,e.prompt):'<em>Nothing added yet. Tick a box or fill in a field.</em>';}
+function rebuild(s){const e=state.ev[s];e.prompt=fullPrompt(s);e.promptEdited=false;}
+async function afterBuilder(s){const e=state.ev[s];if(!e.promptEdited||!has(e.prompt))rebuild(s);else if(await askConfirm('You have edited the full prompt by hand. Rebuild it from the fields to include this change? Your hand edits will be replaced.'))rebuild(s);setTimeout(()=>{flash([`ev.${s}.prompt`]);updPromptDiff(s);},0);}
+const ACT={
+ async exEvidence(el){const m=el.dataset.k.match(/^ev\.([A-D])\.units\.(\d+)\.ex$/);const s=m[1],u=state.ev[s].units[+m[2]],pc=prepClaimFor(s,u.text);
+  if(el.checked&&pc){if((has(u.reason)&&u.reason!==pc.evidence)&&!await askConfirm('Replace your verdict and reason for this sentence with the example?')){el.checked=false;return;}u.verdict=pc.verdict;u.reason=pc.evidence;if(!u.type)u.type=pc.type;}
+  u.ex=el.checked;save();render();},
+ async reflEx(el){const e=state.ev[state.scen],ex=SCEN[state.scen].reflectionExample;
+  if(el.checked){if(has(e.reflection)&&e.reflection!==ex&&!await askConfirm('Replace your reflection with the example reflection?')){el.checked=false;return;}e.reflection=ex;}
+  e.reflEx=el.checked;save();render();},
+ async bFacts(el){const s=state.scen,e=state.ev[s],S=SCEN[s],f=S.facts.map(x=>'- '+x).join('\n'),c=S.constraints.map(x=>'- '+x).join('\n');
+  if(el.checked){if(((has(e.b.facts)&&e.b.facts!==f)||(has(e.b.constraints)&&e.b.constraints!==c))&&!await askConfirm('Replace your text in Relevant facts and Constraints with the scenario details?')){el.checked=false;return;}e.b.facts=f;e.b.constraints=c;}
+  else{if(e.b.facts===f)e.b.facts='';if(e.b.constraints===c)e.b.constraints='';}
+  e.chk.facts=el.checked;await afterBuilder(s);save();render();},
+ async bCrit(el){const s=state.scen,e=state.ev[s],t=SCEN[s].criteria;
+  if(el.checked){if(has(e.b.criteria)&&e.b.criteria!==t&&!await askConfirm('Replace your text in Success criteria with the scenario criteria?')){el.checked=false;return;}e.b.criteria=t;}else if(e.b.criteria===t)e.b.criteria='';
+  e.chk.criteria=el.checked;await afterBuilder(s);save();render();},
+ bAssume(el){toggleLine(el,'assume',ASSUME_LINE);},
+ bMissing(el){toggleLine(el,'missing',MISSING_LINE);},
+ async tuAdd(el){const k=state.tuSel,u=state.tu[k];set(el.dataset.k,el.checked);if(!u.promptEdited||await askConfirm('You have edited the tutor prompt by hand. Rebuild it to include this change? Your hand edits will be replaced.'))tuRebuild(k);save();render();flash([`tu.${k}.prompt`]);},
+ async tpReflEx(el){const d=tpS();if(el.checked){if(has(d.refl)&&d.refl!==TP_REFL&&!await askConfirm('Replace your reflection with the example reflection?')){el.checked=false;return;}d.refl=TP_REFL;}d.reflEx=el.checked;save();render();},
+ async tuReflEx(el){const k=state.tuSel,u=state.tu[k],t=TUTOR[k].reflectionEx;if(el.checked){if(has(u.reflection)&&u.reflection!==t&&!await askConfirm('Replace your reflection with the example reflection?')){el.checked=false;return;}u.reflection=t;}u.reflEx=el.checked;save();render();},
+ async bFindings(el){const s=state.scen,e=state.ev[s],t=findingsText(e);
+  if(el.checked){if(!t){el.checked=false;toast('There are no Unsupported or Uncertain sentences to add.');return;}if(has(e.b.findings)&&e.b.findings!==t&&!await askConfirm('Replace your text in "Problems to fix" with your findings from Verify?')){el.checked=false;return;}e.b.findings=t;}
+  else if(e.b.findings===t)e.b.findings='';
+  e.chk.findings=el.checked;await afterBuilder(s);save();render();}
+};
+async function toggleLine(el,key,line){const s=state.scen,e=state.ev[s];let lines=e.b.missing.split('\n').filter(x=>x.trim()!==line&&x.trim()!=='');if(el.checked)lines.push(line);e.b.missing=lines.join('\n');e.chk[key]=el.checked;await afterBuilder(s);save();render();}
+async function onPick(el){const s=state.scen,i=+el.dataset.pick,d=state.fb[s].dec[i];if(el.value==='')return;const t=SCEN[s].fb.suggestions[+el.value].text;
+ if(has(d.sug)&&d.sug!==t&&!await askConfirm('Replace the suggestion text in this card?')){render();return;}if(d.sug!==t){d.sug=t;d.ex=false;}save();render();}
+async function onAssessEx(el){const a=state.as;if(el.value==='custom'){a.ex='custom';save();render();return;}
+ const x=ASSESS_EX[el.value],keys=['s1','s2','s3','s4','task','ai','verify','evidence','demo'];
+ const own=keys.some(k=>has(a[k])&&!Object.values(ASSESS_EX).some(y=>y[k]===a[k]));
+ if(own&&!await askConfirm(`Replace your sentence and brief with the ${x.label.toLowerCase()} example?`)){render();return;}
+ keys.forEach(k=>a[k]=x[k]);a.ex=el.value;save();render();}
+
+const main=$('#main');
+main.addEventListener('change',e=>{const el=e.target;
+ if(el.id==='saveChk'){state.save=el.checked;if(el.checked){try{localStorage.setItem(KEY,JSON.stringify(state));toast('Saving in this browser.');}catch(_){storageOK=false;state.save=false;render();}}else{try{localStorage.removeItem(KEY);}catch(_){}toast('Saving stopped and the saved copy removed.');}return;}
+ if(el.dataset.mode)return onMode(el);
+ if(el.dataset.asex)return onAssessEx(el);
+ if(el.dataset.pick!==undefined)return onPick(el);
+ if(el.dataset.act)return ACT[el.dataset.act](el);
+ if(el.dataset.norender){set(el.dataset.k,el.checked);const e=state.ev[state.scen],n=e.units.filter(u=>u.sel).length,c=$('#selCount');if(c)c.textContent=`${n} sentence${n===1?'':'s'} selected out of ${e.units.length}.`;save();return;}
+ if(el.dataset.k&&(el.type==='radio'||el.type==='checkbox'||el.tagName==='SELECT')){set(el.dataset.k,el.type==='checkbox'?el.checked:el.value);save();render();}});
+main.addEventListener('input',e=>{const el=e.target,k=el.dataset.k;if(!k||!(el.tagName==='TEXTAREA'||el.type==='text'))return;set(k,el.value);autoGrow(el);
+ let m;
+ if((m=k.match(/^ev\.([A-D])\.b\./))){const ev=state.ev[m[1]];if(!ev.promptEdited){rebuild(m[1]);const p=document.getElementById(fid(`ev.${m[1]}.prompt`));if(p){p.value=ev.prompt;autoGrow(p);}}enableEx(ev);updPromptDiff(m[1]);}
+ if((m=k.match(/^ev\.([A-D])\.prompt$/))){state.ev[m[1]].promptEdited=true;enableEx(state.ev[m[1]]);updPromptDiff(m[1]);}
+ if(/^fb\.[A-D]\.revision$/.test(k)){const f=state.fb[state.scen],d=$('#diffView');if(d)d.innerHTML=has(f.revision)?diffHTML(f.draft,f.revision):'<em>No revision yet.</em>';}
+ if(k.startsWith('as.')){const fo=$('#frameOut');if(fo)fo.innerHTML=frame();const bo=$('#briefOut');if(bo)bo.textContent=briefText();const db=$('#dataBtn');if(db)db.disabled=!has(state.as.dataAns);}
+ if((m=k.match(/^tu\.(t\d)\.attempt$/))){const u=state.tu[m[1]];if(!u.promptEdited){tuRebuild(m[1]);const p=document.getElementById(fid(`tu.${m[1]}.prompt`));if(p){p.value=u.prompt;autoGrow(p);}}tuDiffUpd(m[1]);}
+ if((m=k.match(/^tu\.(t\d)\.prompt$/))){state.tu[m[1]].promptEdited=true;tuDiffUpd(m[1]);}
+ if(/^as\.tp\.d\.\w+\.taskB$/.test(k))tpS().taskBEdited=true;
+ const st=$('#sumText');if(st)st.textContent=notesText();
+ save();});
+function enableEx(ev){const b=$('#showExBtn'),n=$('#showExNote'),ok=has(ev.prompt)&&ev.prompt.trim()!==SCEN[state.scen].initialPrompt.trim();if(b)b.disabled=!ok;if(n&&ok)n.remove();}
+
+const DO={
+ tab(b){state.tab=b.dataset.t;save();render(true);},
+ pick(b){state[b.dataset.k]=b.dataset.v;save();render();},
+ evStep(b){go('ev',+b.dataset.n);}, fbStep(b){go('fb',+b.dataset.n);},
+ copy(b){const el=document.getElementById(b.dataset.from);if(!el)return;const t=el.value!==undefined&&el.tagName==='TEXTAREA'?el.value:el.textContent;if(!has(t)){toast('There is nothing to copy yet.');return;}copyText(t);},
+ async rebuild(){const s=state.scen,e=state.ev[s],t=assemble(e.b);if(!has(t)){toast('The fields are empty. Fill in at least one field, or tick a box above, first.');return;}if(e.prompt===fullPrompt(s)){e.promptEdited=false;flash([`ev.${s}.prompt`]);toast('Your prompt already matches the fields.');return;}if(e.promptEdited&&has(e.prompt)&&!await askConfirm('Replace your edited prompt with one rebuilt from the fields?'))return;rebuild(s);save();render();flash([`ev.${s}.prompt`]);toast('Prompt rebuilt from the fields.');},
+ async suggest(){const s=state.scen,e=state.ev[s],S=SCEN[s],names={goal:'goal',audience:'audience',output:'requested output'},added=[];['goal','audience','output'].forEach(k=>{if(!has(e.b[k])){e.b[k]=S[k];added.push(k);}});if(!added.length){flash([`ev.${s}.b.goal`,`ev.${s}.b.audience`,`ev.${s}.b.output`]);toast('Goal, audience and requested output already have text, so nothing changed. Clear a box to get a suggestion.');return;}await afterBuilder(s);save();render();flash(added.map(k=>`ev.${s}.b.${k}`).concat(`ev.${s}.prompt`));toast('Suggested wording added to '+added.map(k=>names[k]).join(', ')+'. Your prompt has been updated.');},
+ showEx(){state.ev[state.scen].showEx=true;save();render();},
+ async useEx(){const s=state.scen,e=state.ev[s],p=SCEN[s].improvedPrompt;if(has(e.prompt)&&e.prompt!==p&&!await askConfirm('Replace your improved prompt with the example? Your prompt fields stay as they are.'))return;e.prompt=p;e.promptEdited=true;save();render();},
+ async prepSel(){const s=state.scen,e=state.ev[s];if(e.units.some(u=>u.sel&&(u.verdict||has(u.reason)))&&!await askConfirm('Replace your ticks with the prepared example selections? Sentences you untick keep their verdicts in case you tick them again.'))return;const used=new Set();e.units.forEach(u=>{const pc=prepClaimFor(s,u.text);u.sel=!!pc&&!used.has(pc);if(u.sel)used.add(pc);});save();render();},
+ async resplit(){const e=state.ev[state.scen];if(e.units.some(u=>u.sel||u.verdict||has(u.reason))&&!await askConfirm('Divide the response again? Your ticks, verdicts and reasons for this response will be cleared.'))return;e.units=[];e.unitsFrom=null;ensureUnits(e);save();render();},
+ help(b){showHelp(b.dataset.h);},
+ async draftFixed(){const s=state.scen,e=state.ev[s],F=findingsOf(e);const prepRev=e.revMode==='prepared'&&e.revResp===SCEN[s].improvedResponse;const L=[];
+  if(!F.length)L.push('I did not mark any sentence Unsupported or Uncertain, so there were no problems to fix.','[Say whether the revised response still fits the facts.]');
+  F.forEach((u,i)=>{L.push(`${i+1}. "${trimDot(u.text)}" I judged this ${u.verdict.toLowerCase()}${has(u.reason)?': '+brief(u.reason):''}.`);L.push('   '+((prepRev&&outcomeFor(s,u.text))||'[Fixed / Partly fixed / Not fixed]: [point to the line in the revised response that shows this]'));});
+  L.push('',prepRev?STILL[s]:'Still to check: [anything the revised response still assumes or leaves out]');const t=L.join('\n');
+  if(has(e.fixed)&&e.fixed!==t&&!await askConfirm('Replace your answer with a new draft built from your verdicts?'))return;
+  e.fixed=t;e.fixedDraft=prepRev?'prep':'own';save();render();toast('Draft ready. Check it and edit it.');},
+ addSug(){const f=state.fb[state.scen];ensureDec(f);const next=f.sugList.find(t=>!f.dec.some(d=>d.sug.trim()===t.trim()))||'';f.dec.push(blankDec(next));save();render();const el=document.getElementById(fid(`fb.${state.scen}.dec.${f.dec.length-1}.sug`));if(el){el.focus();el.scrollIntoView({block:'center'});}toast(next?'Suggestion added from the feedback.':'New box added. Paste a suggestion from the feedback.');},
+ async delSug(b){const f=state.fb[state.scen],i=+b.dataset.i,d=f.dec[i];if((has(d.sug)||d.decision)&&!await askConfirm('Remove this suggestion and your decision about it?'))return;f.dec.splice(i,1);save();render();},
+ async resplitSug(){const f=state.fb[state.scen];if(f.dec.some(d=>d.decision||has(d.reason))&&!await askConfirm('Divide the feedback again? Your decisions and reasons in this step will be cleared.'))return;f.dec=[];f.sugFrom=null;ensureDec(f);save();render();toast(f.sugList.length?`${f.sugList.length} suggestion${f.sugList.length===1?'':'s'} found in the feedback.`:'No separate suggestions found. Copy them in from the feedback.');},
+ clearSel(){const e=state.ev[state.scen];e.units.forEach(u=>u.sel=false);save();render();},
+ async randomSel(){const e=state.ev[state.scen];if(!e.units.length){toast('There are no sentences yet.');return;}if(e.units.some(u=>u.sel&&(u.verdict||has(u.reason)))&&!await askConfirm('Choose a new random set? Sentences you untick keep their verdicts in case you tick them again.'))return;pickRandom(e.units,5);save();render();toast(e.units.length>5?'5 new sentences chosen at random.':'All sentences are ticked.');},
+ selAll(){const e=state.ev[state.scen];if(!e.units.length){toast('There are no sentences to tick yet.');return;}e.units.forEach(u=>u.sel=true);save();render();toast('All sentences ticked. Untick any that do not matter.');},
+ addUnit(){const i=$('#addUnit'),t=i&&i.value.trim();if(!t){toast('Type or paste a sentence first.');return;}state.ev[state.scen].units.push({text:t,sel:true,type:'',verdict:'',reason:'',ex:false});save();render();toast('Sentence added and ticked.');},
+ pickTask(b){state.tuSel=b.dataset.v;save();render();},
+ tuStep(b){go('tu',+b.dataset.n);},
+ tpStep(b){go('tp',+b.dataset.n);{const h=$("#tpH");if(h){h.scrollIntoView({block:"start"});h.focus({preventScroll:true});}}},
+ async tpResetB(){const t=state.as.tp,X=TP_SECTORS[t.sec],d=tpS(),orig=tpTask(X.taskB,d);if(d.taskB===orig){toast('The task already has the original wording.');return;}if(!await askConfirm('Restore the original wording of version B? Your edits will be replaced.'))return;d.taskB=orig;d.taskBEdited=false;save();render();flash(['as.tp.d.'+t.sec+'.taskB']);toast('Original wording restored.');},
+ async tpLoadAll(){const t=state.as.tp,X=TP_SECTORS[t.sec],d=tpS();if(d.b.some((x,i)=>has(x.text)&&x.text!==X.B[i])&&!await askConfirm('Replace your responses with the example student responses?'))return;d.b.forEach((x,i)=>{x.mode='prepared';x.text=X.B[i];});save();render();const h=$('#tpH');if(h)h.scrollIntoView({block:'start'});toast('Example responses loaded for all five parts.');},
+ async loadTuAttempt(){const k=state.tuSel,u=state.tu[k],t=TUTOR[k].attemptEx;if(has(u.attempt)&&u.attempt!==t&&!await askConfirm('Replace your attempt with the example attempt?'))return;u.attempt=t;if(!u.promptEdited)tuRebuild(k);save();render();flash([`tu.${k}.prompt`]);toast('Example attempt loaded. It contains a typical mistake.');},
+ async loadTuReply(b){const k=state.tuSel,r=+b.dataset.r,R=state.tu[k].rounds[r],t=TUTOR[k].rounds[r].me;if(has(R.me)&&R.me!==t&&!await askConfirm('Replace your reply with the example reply?'))return;R.me=t;save();render();},
+ sendTu(b){const k=state.tuSel,r=+b.dataset.r,R=state.tu[k].rounds[r],m=$('#tuMsg');if(!has(R.ai)){m.innerHTML=`<p class="err">Add tutor reply ${r+1} first.</p>`;return;}if(!has(R.me)){m.innerHTML=`<p class="err">Write your reply ${r+1} first, with your own working.</p>`;return;}R.sent=true;save();render();const nx=document.getElementById(fid(`tu.${k}.rounds.${r+1}.aMode`)+'_'+(TUTOR[k].rounds[r+1]?'prepared':'paste'));if(nx){nx.scrollIntoView({block:'center'});nx.focus({preventScroll:true});}toast(`Round ${r+2} is ready.`);},
+ addTuRound(){const u=state.tu[state.tuSel];u.rounds.forEach(R=>R.sent=true);u.rounds.push({aMode:'paste',ai:'',me:'',sent:false});save();render();toast('New round added. Paste the next tutor reply.');},
+ showData(){state.as.showData=true;save();render();},
+ download(){saveFile('working-better-with-ai-notes.txt',notesText(),'text/plain;charset=utf-8');},
+ async pdfLearn(b){const L=b.closest('.learn');if(!L)return;const i=STRATS.findIndex(x=>x.id===state.tab);const inTp=!!b.closest('#tpPanel');
+  const head=(i>=0?`Strategy ${i+1}: ${STRATS[i].name}${inTp?', practice':''}. `:'')+L.querySelector('h3').textContent;
+  const secs=[];L.querySelectorAll('dt').forEach(dt=>{const dd=dt.nextElementSibling;secs.push([dt.textContent,dd?dd.innerText.replace(/\n{2,}/g,'\n'):''])});
+  await deliverPdf(head,secs);},
+ async pdfNotes(){const secs=[];let cur=null;notesText().split('\n').slice(2).forEach(l=>{const m=l.match(/^== (.*) ==$/);if(m){if(cur)secs.push(cur);cur=[m[1],''];}else if(cur)cur[1]+=l+'\n';});if(cur)secs.push(cur);const t=state.tk;const tk=[['One idea I will try',t.one],['One risk I will watch for',t.two],['One question I still have',t.three]].filter(([,v])=>has(v));
+  if(!secs.length&&!tk.length){toast('There is nothing to put in the PDF yet.');return;}
+  await deliverPdf('My notes and reflections',secs.filter(([h])=>h!=='Takeaways').concat(tk.length?[['My takeaways',tk.map(([l,v])=>l+': '+v.trim()).join('\n')]]:[]));},
+ print(){$('#printArea').innerHTML=`<h1>Working Better with AI: my notes</h1><div class="pre">${esc(notesText())}</div>`;window.print();},
+ async reset(){if(!await askConfirm('Reset clears every entry in every activity on this page. This cannot be undone. Reset now?'))return;state=blankState();try{localStorage.removeItem(KEY);}catch(_){}render(true);toast('Everything has been reset.');}
+};
+main.addEventListener('click',e=>{const b=e.target.closest('[data-do]');if(b&&!b.disabled&&DO[b.dataset.do])DO[b.dataset.do](b);});
+['brandBtn','homeBtn'].forEach(id=>$('#'+id).addEventListener('click',()=>{state.tab='home';save();render(true);}));
+$('#takeBtn').addEventListener('click',()=>{state.tab='take';save();render(true);});
+window.addEventListener('beforeprint',()=>{if(!$('#printArea').innerHTML)$('#printArea').innerHTML=`<h1>Working Better with AI: my notes</h1><div class="pre">${esc(notesText())}</div>`;});
+render();
+</script></body></html>
